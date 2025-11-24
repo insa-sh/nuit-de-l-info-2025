@@ -38,3 +38,28 @@
 - POLAR ANGLE = part du haut
 - Pour savoir si on est sur tablette ou pas (en code) : npm install react-responsive, puis query
 - avec typsecript c'est un peu relou
+
+## Suspense
+
+Pour faire un suspense (chargement du modèle 3D), il faut importer Suspense de react et le mettre DANS le Canvas, autour du modèle 3D.
+Il est cependant spécial : le loader doit être un composant Html spécial à importer depuis drei.
+De plus on peut utiliser le hook useProgress de drei pour avoir le pourcentage de chargement.
+
+```tsx
+import { Html } from "@react-three/drei";
+
+const HeroExperience = () => {
+  function Loader() {
+    const { active, progress, errors, item, loaded, total } = useProgress();
+    return <Html center>{progress} % loaded</Html>;
+  }
+
+  return (
+    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+      <Suspense fallback={<Loader />}>
+        <Room />
+      </Suspense>
+    </Canvas>
+  );
+};
+```
