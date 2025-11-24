@@ -38,7 +38,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <Link
             href="/3d-tuto"
-            className="flex h-12 w-36 bg-amber-900 white rounded-4xl justify-center items-center p-2"
+            className="flex h-12 w-36 bg-blue-900 white rounded-4xl justify-center items-center p-2"
           >
             3D démo
           </Link>
@@ -47,6 +47,12 @@ export default function Home() {
             className="flex h-12 w-36 bg-green-900 white rounded-4xl justify-center items-center p-2"
           >
             GSAP démo
+          </Link>
+          <Link
+            href="/game-tuto"
+            className="flex h-12 w-36 bg-orange-500 white rounded-4xl justify-center items-center p-2"
+          >
+            Game démo
           </Link>
           <Link href="/gsap-tuto"></Link>
         </div>
