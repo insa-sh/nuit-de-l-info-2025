@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
@@ -33,6 +34,21 @@ export default function Home() {
             </a>{" "}
             center.
           </p>
+        </div>
+        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+          <Link
+            href="/3d-tuto"
+            className="flex h-12 w-36 bg-amber-900 white rounded-4xl justify-center items-center p-2"
+          >
+            3D démo
+          </Link>
+          <Link
+            href="/gsap-tuto"
+            className="flex h-12 w-36 bg-green-900 white rounded-4xl justify-center items-center p-2"
+          >
+            GSAP démo
+          </Link>
+          <Link href="/gsap-tuto"></Link>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
