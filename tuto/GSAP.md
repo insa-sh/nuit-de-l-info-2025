@@ -35,3 +35,8 @@ useGSAP(() => {
   }
 }, []);
 ```
+
+## ScrollTrigger
+
+Pour déclencher des animations au scroll, il faut utiliser le plugin ScrollTrigger de gsap.
+Importer ScrollTrigger depuis gsap et l'enregistrer avec `gsap.registerPlugin(ScrollTrigger);`.
