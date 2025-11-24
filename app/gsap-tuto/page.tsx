@@ -26,7 +26,12 @@ export default function Page() {
         if (this.hitTest("#win-area", "50%")) {
           console.log("Hit part 2");
         } else {
-          gsap.to(this.target, { x: 0, y: 0, duration: 1, delay: 1 });
+          gsap.to(this.target, {
+            x: 0,
+            y: 0,
+            duration: 2,
+            ease: "elastic.out(1, 0.3)",
+          });
         }
       },
     });
@@ -60,6 +65,22 @@ export default function Page() {
         duration: 1,
       },
       "<+1"
+    );
+
+    tl.to("#carre-1", {
+      x: -1000,
+      ease: "power1.inOut",
+      duration: 1,
+    });
+
+    tl.to(
+      "#carre-2",
+      {
+        x: +1000,
+        ease: "power1.inOut",
+        duration: 1,
+      },
+      "<"
     );
 
     gsap.to("#particle", {
