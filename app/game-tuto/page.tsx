@@ -40,6 +40,7 @@ export default function Page() {
           dialog: "LA GROSSE CLEF MIAM",
           onCollide(target) {
             target.remove();
+            setHasKey(true);
             game.updateCells(
               { symbol: "d" },
               {
@@ -69,8 +70,8 @@ export default function Page() {
                   dialog: "The door is now open.",
                 }
               );
+              target.remove();
             }
-            target.remove();
           },
         },
       },
