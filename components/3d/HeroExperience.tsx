@@ -1,45 +1,63 @@
 "use client";
 
-import { Html, OrbitControls, useProgress } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useMemo,
+} from "react";
 import { useMediaQuery } from "react-responsive";
-import HeroLights from "./HeroLights";
-import { Room } from "./Room";
+import HeroScene, { HeroSceneRef } from "./HeroScene";
+import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
 
-const HeroExperience = () => {
-  const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+// ON MET TOUS LES PROPS ICI
+interface HeroExperienceProps {
+  onAction?: () => void;
+}
 
-  function Loader() {
-    const { active, progress, errors, item, loaded, total } = useProgress();
-    return <Html center>{progress} % loaded</Html>;
-  }
-
-  return (
-    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
-      <Suspense fallback={<Loader />}>
-        {" "}
-        // SUSPENSE DANS LE CANVA + LOADER SPECIAL
-        <HeroLights />
-        <OrbitControls
-          enablePan={false}
-          enableZoom={!isTablet}
-          maxDistance={30}
-          minDistance={5}
-          minPolarAngle={Math.PI / 5}
-          maxPolarAngle={Math.PI / 2}
-        />
-        <group
-          scale={isMobile ? 0.7 : 1}
-          position={[0, -3.5, 0]}
-          rotation={[0, -Math.PI / 4, 0]}
-        >
-          <Room />
-        </group>
-      </Suspense>
-    </Canvas>
-  );
+export type HeroRef = {
+  triggerAnimation: () => void;
 };
+
+// Utilisation d'un forwardedRef pour permettre au parent d'accéder aux fonctions du composant
+// On fait forwardref, puis le type des props, puis les props que le composant attend comme d'hab
+const HeroExperience = forwardRef<HeroRef, HeroExperienceProps>(
+  ({ onAction }, ref) => {
+    // on décompose tous les props ici !
+    const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
+    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const [scale, setScale] = useState(1);
+    const [dezoom, setDezoom] = useState(false);
+
+    // Ref pour accéder aux méthodes de HeroScene
+    const sceneRef = useRef<HeroSceneRef>(null);
+
+    // C'EST CA QUI PERMET DE DONNER ACCES AU PARENT (la télécommande)
+    useImperativeHandle(ref, () => ({
+      // On met la fonction qu'on a défini dans les props et qu'on a donné au parent là
+      triggerAnimation: () => {
+        console.log("BOUM ! Animation déclenchée dans le Hero !");
+        // Appelle directement la fonction d'animation de la scène
+        sceneRef.current?.animateCamera();
+      },
+    }));
+
+    return (
+      <Canvas camera={{ position: [0, 1, 5], fov: 50, rotation: [0, 0, 0] }}>
+        {" "}
+        // FOV A 50, VUE HUMAINE
+        <HeroScene
+          ref={sceneRef}
+          dezoom={dezoom}
+          scale={scale}
+          isTablet={isTablet}
+          isMobile={isMobile}
+        />
+      </Canvas>
+    );
+  }
+);
 
 export default HeroExperience;

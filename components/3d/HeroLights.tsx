@@ -6,8 +6,8 @@ import * as THREE from "three"; // essentiel pour utiliser des objets de la bibl
 const HeroLights = () => {
   return (
     <>
-      {/* <ambientLight intensity={0.2} color="#1a1a40" />
-      <directionalLight position={[5, 5, 5]} intensity={2} color="#ffffff" /> */}
+      <ambientLight intensity={0.5} color="#1a1a40" />
+      {/* <directionalLight position={[5, 5, 5]} intensity={2} color="#ffffff" /> */}
       <spotLight
         position={[2, 5, 6]}
         intensity={100}
