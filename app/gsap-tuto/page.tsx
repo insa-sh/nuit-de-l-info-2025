@@ -89,8 +89,13 @@ export default function Page() {
         start: "top center",
       },
       stagger: 0.2,
-      duration: 100,
-      physics2D: { velocity: 300, angle: -60, gravity: 400 },
+      duration: 5,
+      physics2D: {
+        velocity: 600,
+        angle: -60,
+        gravity: 800,
+        friction: 0.1,
+      },
     });
   }, []);
 
@@ -113,7 +118,7 @@ export default function Page() {
         <div id="carre-1" className="h-30 w-30 bg-purple-700"></div>
         <div id="carre-2" className="h-30 w-30 bg-red-700"></div>
       </div>
-      <div id="part-3" className="h-screen bg-green-200">
+      <div id="part-3" className="h-screen overflow-hidden bg-green-200">
         <div id="particle" className="bg-black w-10 h-10 rounded-4xl"></div>
         <div id="particle" className="bg-black w-10 h-10 rounded-4xl"></div>
         <div id="particle" className="bg-black w-10 h-10 rounded-4xl"></div>
