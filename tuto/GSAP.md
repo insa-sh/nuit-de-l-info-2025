@@ -40,3 +40,24 @@ useGSAP(() => {
 
 Pour déclencher des animations au scroll, il faut utiliser le plugin ScrollTrigger de gsap.
 Importer ScrollTrigger depuis gsap et l'enregistrer avec `gsap.registerPlugin(ScrollTrigger);`.
+
+## Debug
+
+Il est possible de debug les animations de GSAP individuellement en utilisant les GSAP devTools.
+Pour cela on attribue un id à now tweens/timelines, puis on les associes aux devTools.
+
+```tsx
+gsap.registerPlugin(GSDevTools);
+
+const tween = gsap.to(ref.current.rotation, {
+  y: "+=0.5",
+  repeat: -1,
+  ease: "none",
+  repeatRefresh: true,
+  id: "myTween", // Attribuer un id
+});
+
+GSDevTools.create({ animation: "myTween" }); // Associer aux devTools
+```
+
+Attention ! Il faut enlever tous les ScrollTrigger avant d'utiliser les devTools, car c'est incompatible avec le devtool.
