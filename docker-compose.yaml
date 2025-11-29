@@ -1,11 +1,12 @@
 services:
   web:
-    build: ./Dockerfile
+    build: .
     ports:
-      - "80:3000"
-    container_name: n2i-2025
+      - "80:80"
     depends_on:
       - db
+    profiles:
+      - production
 
   db:
     image: postgres
@@ -19,3 +20,11 @@ services:
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     env_file: "db.env"
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - n2i_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  n2i_data:
