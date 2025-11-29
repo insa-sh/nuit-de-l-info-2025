@@ -4,8 +4,7 @@ import { createGame } from "odyc";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [game, setGame] = useState<any>(null);
-  const [hasKey, setHasKey] = useState(false);
+  let hasKey = false;
 
   useEffect(() => {
     const game = createGame({
@@ -40,7 +39,7 @@ export default function Page() {
           dialog: "LA GROSSE CLEF MIAM",
           onCollide(target) {
             target.remove();
-            setHasKey(true);
+            hasKey = true;
             game.updateCells(
               { symbol: "d" },
               {
@@ -87,7 +86,6 @@ export default function Page() {
 	`,
       background: 1,
     });
-    // setGame(gameInstance);
   }, []);
 
   return <div className="bg-brown"></div>;

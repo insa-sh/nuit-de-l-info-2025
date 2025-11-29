@@ -48,13 +48,12 @@ export default function Home() {
           >
             GSAP démo
           </Link>
-          <Link
+          <a
             href="/game-tuto"
             className="flex h-12 w-36 bg-orange-500 white rounded-4xl justify-center items-center p-2"
           >
             Game démo
-          </Link>
-          <Link href="/gsap-tuto"></Link>
+          </a>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
