@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, start the docker compose to run the database:
+
+```bash
+docker compose up -d
+```
+
+The database is not exposed to the host machine by default but you can add a port mapping in the `docker-compose.yml` if you want to access it directly.
+
+Then run the development server:
 
 ```bash
 npm run dev
@@ -20,17 +28,13 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+We are using Docker Compose for deployment. To build and run the application, use the following command:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker compose --profile production up
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This will build and start both the web application (in production mode) and the PostgreSQL database.
+The web application will be accessible at [http://localhost:80](http://localhost:80).
