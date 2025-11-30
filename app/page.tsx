@@ -48,6 +48,18 @@ export default function Home() {
           >
             GSAP démo
           </Link>
+          <Link
+            href="/theme-tuto"
+            className="flex h-12 w-36 bg-purple-900 white rounded-4xl justify-center items-center p-2"
+          >
+            Theme démo
+          </Link>
+          <Link
+            href="/better-auth-tuto/sign-up"
+            className="flex h-12 w-40 bg-pink-900 white rounded-4xl justify-center items-center p-2"
+          >
+            Better Auth démo
+          </Link>
           <a
             href="/game-tuto"
             className="flex h-12 w-36 bg-orange-500 white rounded-4xl justify-center items-center p-2"

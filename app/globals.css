@@ -10,6 +10,39 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-background: var(--color-background);
+  --color-text: var(--color-text);
+}
+
+@layer base {
+  /* Theme Variations */
+  .theme-blue {
+    --color-primary: #3b82f6;
+    --color-secondary: #1e40af;
+    --color-accent: #e0f2fe;
+    --color-background: #eff6ff;
+    --color-text: #1e293b;
+  }
+
+  .theme-green {
+    --color-primary: #22c55e;
+    --color-secondary: #166534;
+    --color-accent: #bbf7d0;
+    --color-background: #f0fdf4;
+    --color-text: #14532d;
+  }
+
+  .theme-red {
+    --color-primary: #ef4444;
+    --color-secondary: #7f1d1d;
+    --color-accent: #fecaca;
+    --color-background: #fef2f2;
+    --color-text: #7f1d1d;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
