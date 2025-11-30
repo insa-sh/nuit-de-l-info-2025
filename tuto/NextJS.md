@@ -270,6 +270,53 @@ export default function Page() {
 Attention ; si il y a le moindre composant asynchrone dans la page, et qu'il n'est pas dans un suspense, il utilisera le fichier `loading.tsx` du dossier.
 Et s'il n'y en a pas il n'affichera rien en attendant.
 
+---
+
+## Lazy loading (Next.js App Router)
+
+```tsx
+import { useState, Suspense, lazy } from "react";
+
+const Chart = lazy(() => import("./Chart"));
+
+export default function Dashboard() {
+  const [showChart, setShowChart] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setShowChart(true)}>Afficher le graphique</button>
+      {/* Lazy loading déclenché quand showChart = true */}
+      <Suspense fallback={<div>Chargement du graphique...</div>}>
+        {showChart && <Chart />}
+      </Suspense>
+    </div>
+  );
+}
+```
+
+### `next/dynamic`
+
+Charger un composant lourd à la demande.
+
+```tsx
+"use client";
+
+import dynamic from "next/dynamic";
+
+const HeavyChart = dynamic(() => import("./HeavyChart"), {
+  loading: () => <p>Chargement…</p>,
+  ssr: false, // optionnel
+});
+
+export default function Page() {
+  return (
+    <section>
+      <HeavyChart />
+    </section>
+  );
+}
+```
+
 ## Importer une image
 
 On préfère utiliser le composant `Image` de Next.js pour importer des images, car il offre des optimisations automatique.
