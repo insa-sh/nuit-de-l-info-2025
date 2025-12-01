@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations("HomePage");
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -18,7 +20,7 @@ export default function Home() {
             To get started, edit the page.tsx file.
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+            {t("welcome")}
             <a
               href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               className="font-medium text-zinc-950 dark:text-zinc-50"
@@ -47,6 +49,12 @@ export default function Home() {
             className="flex h-12 w-36 bg-green-900 white rounded-4xl justify-center items-center p-2"
           >
             GSAP démo
+          </Link>
+          <Link
+            href="/i18n-tuto"
+            className="flex h-12 w-36 bg-red-900 white rounded-4xl justify-center items-center p-2"
+          >
+            i18n démo
           </Link>
           <Link
             href="/theme-tuto"
