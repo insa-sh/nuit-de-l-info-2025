@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@prisma/adapter-pg": "^7.0.1",
+    "@prisma/client": "^7.0.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/postprocessing": "^3.0.4",
     "better-auth": "^1.4.3",
+    "dotenv": "^17.2.3",
     "gsap": "^3.13.0",
     "next": "16.0.3",
     "next-intl": "^4.5.7",
@@ -26,12 +29,13 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.25",
     "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "prisma": "^7.0.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
