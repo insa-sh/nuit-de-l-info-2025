@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function Page() {
   const [name, setName] = useState("");
@@ -28,6 +29,7 @@ export default function Page() {
         },
         onSuccess: (ctx) => {
           //redirect to the dashboard or sign in page
+          redirect("/better-auth-tuto/sign-in");
         },
         onError: (ctx) => {
           // display the error message
@@ -121,7 +123,10 @@ export default function Page() {
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{" "}
-          <a href="/sign-in" className="text-purple-600 hover:underline">
+          <a
+            href="/better-auth-tuto/sign-in"
+            className="text-purple-600 hover:underline"
+          >
             Sign in
           </a>
         </p>
