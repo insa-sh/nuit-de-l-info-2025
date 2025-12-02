@@ -24,6 +24,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Variable d'environnement factice pour la génération Prisma
+ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
+
 # Générer le client Prisma AVANT le build
 RUN npx prisma generate
 
