@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const { v1: uuidv1 } = require('uuid');
 
-const users = {};
+const admin_id = uuidv1();
+const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: Infinity, cps: Infinity, multiplier: Infinity, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
 const PORT = 3000;
 
 const app = express();
