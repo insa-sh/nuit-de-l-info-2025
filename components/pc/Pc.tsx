@@ -1,9 +1,10 @@
 import * as THREE from "three";
-import React, { useRef, JSX } from "react"; 
+import React, { useRef, JSX, useState, useMemo, useEffect } from "react"; 
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,55 +37,165 @@ type GLTFResult = GLTF & {
   };
 };
 
-function upgrade(ref: React.RefObject<THREE.Mesh>) {
+// Fonction d'upgrade qui gère rotation et particules
+function performUpgrade(
+  ref: React.RefObject<THREE.Mesh>,
+  onParticlesStart: () => void,
+  onParticlesEnd: () => void
+) {
   if (ref.current) {
-      // Rotation sur y permanente
-      gsap.to(ref.current.rotation, {
-        y: `+=${2 * Math.PI * 4}`,
-        duration: 3,
-        ease: "power2.inOut",
-      });
+    // Rotation sur y permanente
+    gsap.to(ref.current.rotation, {
+      y: `+=${2 * Math.PI * 4}`,
+      duration: 3,
+      ease: "power2.inOut",
+    });
 
-      // Animation du scale
-      gsap.to(ref.current.scale, {
-        x: 1.4,
-        y: 1.4,
-        z: 1.4,
-        duration: 2,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: 1, // va grandir puis revenir à la taille normale
-      });
-    }
+    // Animation du scale
+    gsap.to(ref.current.scale, {
+      x: 1.4,
+      y: 1.4,
+      z: 1.4,
+      duration: 2,
+      ease: "power2.inOut",
+      yoyo: true,
+      repeat: 1,
+    });
+
+    // Déclencher les particules pendant l'animation
+    onParticlesStart();
+    setTimeout(onParticlesEnd, 4000);
+  }
 }
 
-// function click(ref: React.RefObject<THREE.Mesh>) {
-//   if (ref.current) {
-//       // Animation du scale
-//       gsap.to(ref.current.scale, {
-//         x: 1.1,
-//         y: 1.1,
-//         z: 1.1,
-//         duration: 0.1,
-//         ease: "power2.inOut",
-//         yoyo: true,
-//         overwrite: 'auto',
-//         repeat: 1, // va grandir puis revenir à la taille normale
-//       });
-//     }
-// }
+// Composant pour les particules d'upgrade
+function UpgradeParticles({ isActive }: { isActive: boolean }) {
+  const pointsRef = useRef<THREE.Points>(null);
+  const particlesRef = useRef<Array<{
+    position: THREE.Vector3;
+    velocity: THREE.Vector3;
+    life: number;
+    maxLife: number;
+  }>>([]);
+  const hasSpawnedRef = useRef(false);  // Tracker si on a déjà spawné
+
+  const particleCount = 100;
+
+  const { geometry, material } = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const mat = new THREE.PointsMaterial({
+      color: '#00ff88',
+      size: 0.3,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.8,
+    });
+
+    return { geometry: geo, material: mat };
+  }, []);
+
+  // Générer de nouvelles particules
+  const spawnParticles = (count: number) => {
+    const newParticles = [];
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.3 + Math.random() * 0.5;
+      
+      newParticles.push({
+        position: new THREE.Vector3(0, 0, -2),
+        velocity: new THREE.Vector3(
+          Math.cos(angle) * speed,
+          (Math.random() - 0.5) * speed,
+          Math.sin(angle) * speed
+        ),
+        life: 1,
+        maxLife: 1,
+      });
+    }
+    particlesRef.current.push(...newParticles);
+  };
+
+  useFrame(() => {
+    if (!pointsRef.current || !geometry) return;
+
+    // Spawner 2 groupes de 50 une seule fois
+    if (isActive && !hasSpawnedRef.current) {
+      spawnParticles(50);  // Premier groupe
+      spawnParticles(50);  // Deuxième groupe
+      hasSpawnedRef.current = true;
+    }
+
+    // Réinitialiser quand isActive devient false
+    if (!isActive && hasSpawnedRef.current) {
+      hasSpawnedRef.current = false;
+    }
+
+    // Mettre à jour les particules
+    const particles = particlesRef.current;
+    const positions = geometry.attributes.position.array as Float32Array;
+
+    let activeCount = 0;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.life -= 0.01;
+
+      if (p.life > 0) {
+        p.position.add(p.velocity);
+        positions[activeCount * 3] = p.position.x;
+        positions[activeCount * 3 + 1] = p.position.y;
+        positions[activeCount * 3 + 2] = p.position.z;
+
+        activeCount++;
+      }
+    }
+
+    // Supprimer les particules mortes
+    particlesRef.current = particles.filter(p => p.life > 0);
+
+    geometry.attributes.position.count = activeCount;
+    geometry.attributes.position.needsUpdate = true;
+
+    // Mettre à jour l'opacité
+    if (material instanceof THREE.PointsMaterial) {
+      material.opacity = isActive ? 0.8 : Math.max(0, material.opacity - 0.02);
+    }
+  });
+
+  return <points ref={pointsRef} geometry={geometry} material={material} />;
+}
+
+
 
 export function Pc(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF('/models/old_pc.glb') as unknown as GLTFResult;
 
   const ref = useRef<THREE.Mesh>(null);
+  const [isUpgrading, setIsUpgrading] = useState(false);
+  const upgradeTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const clickTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  upgrade(ref);
+  // Appeler l'upgrade au chargement de la page
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      performUpgrade(
+        ref,
+        () => setIsUpgrading(true),
+        () => setIsUpgrading(false)
+      );
+    }, 500);
 
-  let t1 = gsap.timeline({ paused: true });
+    return () => clearTimeout(timer);
+  }, []);
 
-  if (ref.current) {
-    t1.to(ref.current.scale, {
+  // Créer la timeline du click (animation légère au clic)
+  useEffect(() => {
+    if (ref.current) {
+      clickTimelineRef.current = gsap.timeline({ paused: true });
+      clickTimelineRef.current.to(ref.current.scale, {
         x: 1.05,
         y: 1.05,
         z: 1.05,
@@ -92,46 +203,53 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
         ease: "power2.inOut",
         yoyo: true,
         overwrite: 'auto',
-        repeat: 1, // va grandir puis revenir à la taille normale
+        repeat: 1,
       });
-  }
-  
+    }
+  }, []);
 
   const handleClick = (event: THREE.Event) => {
     event.stopPropagation();
-    t1.restart();
+    // Timeline du click uniquement (animation légère)
+    if (clickTimelineRef.current) {
+      clickTimelineRef.current.restart();
+    }
   };
 
   return (
-    <group 
-      {...props} 
-      ref={ref} 
-      dispose={null} 
-      position={[0, -10, -25]}
-      onClick={handleClick}
-      onPointerOver={() => document.body.style.cursor = 'pointer'}
-      onPointerOut={() => document.body.style.cursor = 'default'}
-    >
-      <group rotation={[-Math.PI / 2, 0, 0]} position={[-19.91, -10.50, 20.88]}>
-        <group position={[0, 0, 0]}>
-          <mesh geometry={nodes.Object_5.geometry} material={materials.VoxMaterial_64} />
-          <mesh geometry={nodes.Object_6.geometry} material={materials.VoxMaterial_72} />
-          <mesh geometry={nodes.Object_7.geometry} material={materials.VoxMaterial_86} />
-          <mesh geometry={nodes.Object_8.geometry} material={materials.VoxMaterial_87} />
-          <mesh geometry={nodes.Object_9.geometry} material={materials.VoxMaterial_88} />
-          <mesh geometry={nodes.Object_10.geometry} material={materials.VoxMaterial_95} />
-          <mesh geometry={nodes.Object_11.geometry} material={materials.VoxMaterial_96} />
-          <mesh geometry={nodes.Object_12.geometry} material={materials.VoxMaterial_112} />
-          <mesh geometry={nodes.Object_13.geometry} material={materials.VoxMaterial_128} />
-          <mesh geometry={nodes.Object_14.geometry} material={materials.VoxMaterial_136} />
-          <mesh geometry={nodes.Object_15.geometry} material={materials.VoxMaterial_160} />
-          <mesh geometry={nodes.Object_16.geometry} material={materials.VoxMaterial_168} />
+    <>
+      <UpgradeParticles isActive={isUpgrading} />
+      <group 
+        {...props} 
+        ref={ref} 
+        dispose={null} 
+        position={[0, -10, -25]}
+        onClick={handleClick}
+        onPointerOver={() => document.body.style.cursor = 'pointer'}
+        onPointerOut={() => document.body.style.cursor = 'default'}
+      >
+        <group rotation={[-Math.PI / 2, 0, 0]} position={[-19.91, -10.50, 20.88]}>
+          <group position={[0, 0, 0]}>
+            <mesh geometry={nodes.Object_5.geometry} material={materials.VoxMaterial_64} />
+            <mesh geometry={nodes.Object_6.geometry} material={materials.VoxMaterial_72} />
+            <mesh geometry={nodes.Object_7.geometry} material={materials.VoxMaterial_86} />
+            <mesh geometry={nodes.Object_8.geometry} material={materials.VoxMaterial_87} />
+            <mesh geometry={nodes.Object_9.geometry} material={materials.VoxMaterial_88} />
+            <mesh geometry={nodes.Object_10.geometry} material={materials.VoxMaterial_95} />
+            <mesh geometry={nodes.Object_11.geometry} material={materials.VoxMaterial_96} />
+            <mesh geometry={nodes.Object_12.geometry} material={materials.VoxMaterial_112} />
+            <mesh geometry={nodes.Object_13.geometry} material={materials.VoxMaterial_128} />
+            <mesh geometry={nodes.Object_14.geometry} material={materials.VoxMaterial_136} />
+            <mesh geometry={nodes.Object_15.geometry} material={materials.VoxMaterial_160} />
+            <mesh geometry={nodes.Object_16.geometry} material={materials.VoxMaterial_168} />
+          </group>
         </group>
       </group>
-    </group>
+    </>
   )
 }
 
-
-
 useGLTF.preload('/models/old_pc.glb')
+
+// Exporter la fonction d'upgrade pour l'utiliser ailleurs
+export { performUpgrade };
