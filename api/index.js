@@ -65,12 +65,12 @@ app.post("/purchase", identify_user, async (req, res) => {
         return;
     }
 
-    if (req.sessions.purchases.find(p => p.id === body.id)) {
+    if (req.session.purchases.find(p => p.id === body.id)) {
         res.status(400).json({ error: "Item already purchased." });
         return;
     }
 
-    if (req.sessions.purchases.length >= 100) {
+    if (req.session.purchases.length >= 100) {
         res.status(400).json({ error: "Purchase limit reached." });
         return;
     }
