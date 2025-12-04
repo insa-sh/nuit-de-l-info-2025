@@ -2,8 +2,10 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const { v1: uuidv1 } = require('uuid');
 
+const MAX_CURRENCY = 1e300;
+
 const admin_id = uuidv1();
-const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e300, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
+const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
 const PORT = 3000;
 
 const app = express();
@@ -34,7 +36,7 @@ async function identify_user(req, res, next) {
 
 app.get("/click", identify_user, async (req, res) => {
   const gain = 1 * req.session.multiplier;
-  req.session.currency += gain;
+  req.session.currency = Math.min(req.session.currency + gain, MAX_CURRENCY);
   res.json({ currency: Math.floor(req.session.currency) });
 });
 
@@ -43,7 +45,7 @@ app.get("/balance", identify_user, async (req, res) => {
   const session = req.session;
 
   const elapsedSeconds = (now - new Date(session.last_seen).getTime()) / 1000;
-  session.currency += session.cps * elapsedSeconds;
+  session.currency = Math.min(session.currency + session.cps * elapsedSeconds, MAX_CURRENCY);
 
   res.json({ currency: Math.floor(req.session.currency) });
   req.session.last_seen = new Date();
