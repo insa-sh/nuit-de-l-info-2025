@@ -76,33 +76,42 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
     velocity: THREE.Vector3;
     life: number;
     maxLife: number;
+    color: THREE.Color;
   }>>([]);
-  const hasSpawnedRef = useRef(false);  // Tracker si on a déjà spawné
+  const hasSpawnedRef = useRef(false);
 
   const particleCount = 100;
 
   const { geometry, material } = useMemo(() => {
     const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+    
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const mat = new THREE.PointsMaterial({
-      color: '#00ff88',
       size: 0.3,
       sizeAttenuation: true,
       transparent: true,
       opacity: 0.8,
+      vertexColors: true,
     });
 
     return { geometry: geo, material: mat };
   }, []);
 
-  // Générer de nouvelles particules
+  // Générer de nouvelles particules avec des couleurs variées
   const spawnParticles = (count: number) => {
     const newParticles = [];
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = 0.3 + Math.random() * 0.5;
+      
+      // Créer une couleur aléatoire
+      const color = new THREE.Color();
+      const hue = Math.random(); // 0 à 1 pour toute la gamme de couleurs
+      color.setHSL(hue, 0.8 + Math.random() * 0.2, 0.5 + Math.random() * 0.3);
       
       newParticles.push({
         position: new THREE.Vector3(0, 0, -2),
@@ -113,6 +122,7 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
         ),
         life: 1,
         maxLife: 1,
+        color: color,
       });
     }
     particlesRef.current.push(...newParticles);
@@ -121,21 +131,19 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
   useFrame(() => {
     if (!pointsRef.current || !geometry) return;
 
-    // Spawner 2 groupes de 50 une seule fois
     if (isActive && !hasSpawnedRef.current) {
-      spawnParticles(50);  // Premier groupe
-      spawnParticles(50);  // Deuxième groupe
+      spawnParticles(50);
+      spawnParticles(50);
       hasSpawnedRef.current = true;
     }
 
-    // Réinitialiser quand isActive devient false
     if (!isActive && hasSpawnedRef.current) {
       hasSpawnedRef.current = false;
     }
 
-    // Mettre à jour les particules
     const particles = particlesRef.current;
     const positions = geometry.attributes.position.array as Float32Array;
+    const colors = geometry.attributes.color.array as Float32Array;
 
     let activeCount = 0;
 
@@ -145,21 +153,26 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
 
       if (p.life > 0) {
         p.position.add(p.velocity);
-        positions[activeCount * 3] = p.position.x;
-        positions[activeCount * 3 + 1] = p.position.y;
-        positions[activeCount * 3 + 2] = p.position.z;
+        
+        const idx = activeCount * 3;
+        positions[idx] = p.position.x;
+        positions[idx + 1] = p.position.y;
+        positions[idx + 2] = p.position.z;
+
+        colors[idx] = p.color.r;
+        colors[idx + 1] = p.color.g;
+        colors[idx + 2] = p.color.b;
 
         activeCount++;
       }
     }
 
-    // Supprimer les particules mortes
     particlesRef.current = particles.filter(p => p.life > 0);
 
-    geometry.attributes.position.count = activeCount;
     geometry.attributes.position.needsUpdate = true;
+    geometry.attributes.color.needsUpdate = true;
+    geometry.setDrawRange(0, activeCount);
 
-    // Mettre à jour l'opacité
     if (material instanceof THREE.PointsMaterial) {
       material.opacity = isActive ? 0.8 : Math.max(0, material.opacity - 0.02);
     }
