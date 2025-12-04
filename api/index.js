@@ -61,6 +61,21 @@ app.post("/purchase", identify_user, async (req, res) => {
     return;
   }
 
+  if (req.session.currency < body.cost) {
+    res.status(400).json({ error: "Not enough money." });
+    return;
+  }
+
+  if (req.session.purchases.find(p => p.id === body.id)) {
+    res.status(400).json({ error: "Item already purchased." });
+    return;
+  }
+
+  if (req.session.purchases.length >= 100) {
+    res.status(400).json({ error: "Purchase limit reached." });
+    return;
+  }
+
   req.session.currency -= body.cost;
   req.session.cps += body.cps;
   req.session.multiplier += body.multiplier;
