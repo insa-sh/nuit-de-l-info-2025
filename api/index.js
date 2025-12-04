@@ -91,6 +91,31 @@ app.post("/purchase", identify_user, async (req, res) => {
   res.json(req.session);
 });
 
+app.post("/claim_username", identify_user, async (req, res) => {
+  const body = req.body;
+  if (typeof body !== "object" || typeof body.username !== 'string' || body.username.length !== 8) {
+    res.status(400).json({ error: "Invalid username." });
+    return;
+  }
+
+  req.session.username = body.username;
+  res.json({ success: true, username: req.session.username });
+  console.log(users);
+});
+
+app.get("/scoreboard", async (req, res) => {
+  const scoreboard = Object.values(users)
+    .filter(u => u.username)
+    .sort((a, b) => b.currency - a.currency)
+    .map(u => ({
+      username: u.username,
+      currency: Math.floor(u.currency),
+      created_at: u.creation_date,
+    }));
+
+  res.json(scoreboard);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
