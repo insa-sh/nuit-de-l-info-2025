@@ -5,7 +5,7 @@ const { v1: uuidv1 } = require('uuid');
 const MAX_CURRENCY = 1e300;
 
 const admin_id = uuidv1();
-const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
+const users = { [admin_id]: { username: "admin", last_seen: Date.now(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
 const PORT = 3000;
 
 const app = express();
@@ -19,7 +19,7 @@ async function identify_user(req, res, next) {
     session_id = uuidv1();
 
     users[session_id] = {
-      last_seen: new Date(),
+      last_seen: Date.now(),
       creation_date: get_date_obj(session_id),
       currency: 0,
       cps: 0,
@@ -44,11 +44,11 @@ app.get("/balance", identify_user, async (req, res) => {
   const now = Date.now();
   const session = req.session;
 
-  const elapsedSeconds = (now - new Date(session.last_seen).getTime()) / 1000;
+  const elapsedSeconds = (now - session.last_seen) / 1000;
   session.currency = Math.min(session.currency + session.cps * elapsedSeconds, MAX_CURRENCY);
 
   res.json({ currency: Math.floor(req.session.currency) });
-  req.session.last_seen = new Date();
+  req.session.last_seen = Date.now();
 });
 
 app.get("/user", identify_user, async (req, res) => {
@@ -87,7 +87,7 @@ app.post("/purchase", identify_user, async (req, res) => {
     cost: body.cost,
     cps: body.cps,
     multiplier: body.multiplier,
-    purchased_on: new Date(),
+    purchased_on: Date.now(),
   });
 
   res.json(req.session);
@@ -135,6 +135,6 @@ function get_time_int(uuid_str) {
 function get_date_obj(uuid_str) {
   var int_time = get_time_int(uuid_str) - 122192928000000000,
     int_millisec = Math.floor(int_time / 10000);
-  return new Date(int_millisec);
+  return int_millisec;
 };
 
