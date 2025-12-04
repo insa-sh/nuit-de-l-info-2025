@@ -1,6 +1,9 @@
 "use client";
 
 import HeroExperience, { HeroRef } from "@/components/3d/HeroExperience";
+import { Pc } from "@/components/pc/Pc";
+import PcScene from "@/components/pc/PcScene";
+import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
 
 export default function Page() {
@@ -14,15 +17,11 @@ export default function Page() {
 
   return (
     <div className="h-screen w-full">
-      <div className="h-5/6">
-        <HeroExperience ref={childRef} />
+      <div className="h-screen w-full">
+        <Canvas camera={{ position: [0, 5, 10], fov: 90 }}>
+          <PcScene />
+        </Canvas>
       </div>
-      <button
-        onClick={() => handleClick()}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Toggle Active
-      </button>
     </div>
   );
 }
