@@ -168,7 +168,29 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
   return <points ref={pointsRef} geometry={geometry} material={material} />;
 }
 
+// Timeline globale pour le click
+let clickTimeline: gsap.core.Timeline | null = null;
 
+function performClickAnimation(ref: React.RefObject<THREE.Mesh>) {
+  if (!ref.current) return;
+  
+  // Créer la timeline une seule fois
+  if (!clickTimeline) {
+    clickTimeline = gsap.timeline({ paused: true });
+    clickTimeline.to(ref.current.scale, {
+      x: 1.05,
+      y: 1.05,
+      z: 1.05,
+      duration: 0.1,
+      ease: "power2.inOut",
+      yoyo: true,
+      repeat: 1,
+    });
+  }
+  
+  // Redémarrer la timeline depuis le début
+  clickTimeline.restart();
+}
 
 export function Pc(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF('/models/old_pc.glb') as unknown as GLTFResult;
@@ -192,28 +214,26 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
   }, []);
 
   // Créer la timeline du click (animation légère au clic)
-  useEffect(() => {
-    if (ref.current) {
-      clickTimelineRef.current = gsap.timeline({ paused: true });
-      clickTimelineRef.current.to(ref.current.scale, {
-        x: 1.05,
-        y: 1.05,
-        z: 1.05,
-        duration: 0.1,
-        ease: "power2.inOut",
-        yoyo: true,
-        overwrite: 'auto',
-        repeat: 1,
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     clickTimelineRef.current = gsap.timeline({ paused: true });
+  //     clickTimelineRef.current.to(ref.current.scale, {
+  //       x: 1.05,
+  //       y: 1.05,
+  //       z: 1.05,
+  //       duration: 0.1,
+  //       ease: "power2.inOut",
+  //       yoyo: true,
+  //       overwrite: 'auto',
+  //       repeat: 1,
+  //     });
+  //   }
+  // }, []);
 
   const handleClick = (event: THREE.Event) => {
     event.stopPropagation();
     // Timeline du click uniquement (animation légère)
-    if (clickTimelineRef.current) {
-      clickTimelineRef.current.restart();
-    }
+    performClickAnimation(ref);
   };
 
   return (
@@ -251,5 +271,6 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
 
 useGLTF.preload('/models/old_pc.glb')
 
-// Exporter la fonction d'upgrade pour l'utiliser ailleurs
-export { performUpgrade };
+// Exporter la fonction d'upgrade et de click pour l'utiliser ailleurs
+// export { performUpgrade };
+// export { performClickAnimation };
