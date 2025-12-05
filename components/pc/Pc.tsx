@@ -53,9 +53,9 @@ function performUpgrade(
 
     // Animation du scale
     gsap.to(ref.current.scale, {
-      x: 1.4,
-      y: 1.4,
-      z: 1.4,
+      x: 1.2,
+      y: 1.2,
+      z: 1.2,
       duration: 2,
       ease: "power2.inOut",
       yoyo: true,
@@ -256,7 +256,7 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
         {...props} 
         ref={ref} 
         dispose={null} 
-        position={[0, -10, -25]}
+        position={[0, 0, -37]}
         onClick={handleClick}
         onPointerOver={() => document.body.style.cursor = 'pointer'}
         onPointerOut={() => document.body.style.cursor = 'default'}
