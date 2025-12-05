@@ -1,19 +1,25 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import InfoPopup from '@/components/InfoPopup'
 
 export default function pageAccueil() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
   return (
     <div className='flex flex-col gap-6 items-center justify-center p-7'>
       <div className='flex flex-col gap-6 items-center w-full'>
         {/* Header */}
-        <div className='flex items-center w-full'>
+        <div className='flex items-center justify-between w-full'>
           <div className='flex gap-4 items-center'>
             <div className='bg-[#d9d9d9] w-[61px] h-[61px]' />
             <p className='text-white text-[32px] font-normal' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-              NDIR Advisor
+              NIRD Advisor
             </p>
           </div>
+          
         </div>
 
         {/* Hero Section */}
@@ -38,7 +44,7 @@ export default function pageAccueil() {
           </div>
           
           <p className='text-white text-[32px] md:text-[48px] font-normal relative z-10' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-            NDIR Advisor
+            NIRD Advisor
           </p>
           
           <div className='flex flex-col items-center relative z-10'>
@@ -47,7 +53,7 @@ export default function pageAccueil() {
               <span className='font-bold underline decoration-solid [text-underline-position:from-font]' style={{ color: '#53ac83' }}>
                 responsabiliser
               </span>
-              <span> votre parc informatique avec la NDIR !</span>
+              <span> votre parc informatique avec la NIRD !</span>
             </p>
           </div>
           
@@ -73,15 +79,15 @@ export default function pageAccueil() {
           </div>
         </div>
 
-        {/* NDIR Section */}
+        {/* NIRD Section */}
         <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full' style={{
               background: `
                 radial-gradient(94.61% 96.7% at 20.16% 47.05%, rgba(79, 0, 237, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)`
             }}>
           <div className='relative flex-shrink-0'>
             <Image 
-              src="/images/ndir-logo.png" 
-              alt="NDIR Logo" 
+              src="/images/nird-logo.png" 
+              alt="NIRD Logo" 
               width={373} 
               height={154}
               className='object-cover'
@@ -90,13 +96,13 @@ export default function pageAccueil() {
           
           <div className='flex flex-col gap-[79px] items-center flex-1' >
             <p className='text-white text-[32px] md:text-[48px] font-normal w-full' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-              NDIR - Inclusif, Responsable & Durable
+              NIRD - Inclusif, Responsable & Durable
             </p>
             
             <div className='text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
               <p className='mb-0'>
                 <span>Grâce la </span>
-                <span className='font-bold'>démarche NDIR</span>
+                <span className='font-bold'>démarche NIRD</span>
                 <span>, transformez vos systèmes et infrastructures informatiques pour les rendre autonome, responsables et indépendentes. Nous vous guidons pas-à-pas pour transformer votre parc informatique en un outil inclusif, durable et responsable. </span>
               </p>
               <p className='mb-0'>&nbsp;</p>
@@ -111,13 +117,13 @@ export default function pageAccueil() {
             
             <Link href="https://nird.forge.apps.education.fr/" target="_blank" className='flex items-center justify-center px-6 md:px-8 py-3 md:py-4 rounded-[20px] overflow-hidden w-full md:w-auto' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
               <p className='text-white text-[18px] md:text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-              Voir le site de la NDIR →
+              Voir le site de la NIRD →
               </p>
             </Link>
           </div>
         </div>
 
-        {/* Le Clicker NDIR Section */}
+        {/* Le Clicker NIRD Section */}
         <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full relative'>
           {/* Background gradients */}
           <div className='absolute inset-0 pointer-events-none' 
@@ -139,14 +145,14 @@ export default function pageAccueil() {
           
           <div className='flex flex-col gap-[79px] items-center flex-1 relative z-10'>
             <p className='text-white text-[32px] md:text-[48px] font-normal w-full' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-              Le Clicker NDIR
+              Le Clicker NIRD
             </p>
             
             <div className='text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
               <p className='mb-0'>Connaissez-vous le jeu Cookie Clicker ? Un jeu simple et efficace. A chaque fois que le joueur clique sur le cookie, il gagne de l'argent. Avec cet argent, il peut améliorer ses clics, installer des clickers automatiques, ou des fermes à clic. Le but est d'obtenir toujours plus de clics.</p>
               <p className='mb-0'>&nbsp;</p>
               <p className='mb-0'>
-                <span>A travers la démarche NDIR, nous souhaitons mettre en place </span>
+                <span>A travers la démarche NIRD, nous souhaitons mettre en place </span>
                 <span className='font-bold'>des infrastructures toujours plus éthiques</span>
                 <span>, toujours plus responsables et souveraines. Le principe du jeu est le suivant : Plus vous touchez à votre infra, plus vous gagnerez de l'argent, et plus vous pourrez l'améliorer.</span>
               </p>
@@ -164,6 +170,19 @@ export default function pageAccueil() {
           </div>
         </div>
       </div>
+
+      {/* Popup */}
+      <InfoPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        title="Installation d'un OS Libre & Open Source"
+        description="Windows 10 ? Obsolète. Windows 11 ? C'est lourd et cela dépend de Microsoft. Utilisez un système d'exploitation Open Source - cela signifie que le système n'est la propriété d'aucune entreprise et n'a pas pour objectif de faire gagner de l'argent à qui que ce soit."
+        imageSrc="/images/computer.png"
+        primaryButtonText="C'est super !"
+        secondaryButtonText="En savoir plus"
+        onPrimaryClick={() => console.log('Primary clicked')}
+        onSecondaryClick={() => console.log('Secondary clicked')}
+      />
     </div>
   )
 }

@@ -27,7 +27,7 @@ export default function leaderboard() {
             className='text-white text-[24px] md:text-[32px] font-normal'
             style={{ fontFamily: 'var(--font-pixelify-sans)' }}
           >
-            NDIR Advisor
+            NIRD Advisor
           </p>
         </Link>
       </div>
