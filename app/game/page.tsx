@@ -1,10 +1,14 @@
+"use client";
+
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import React from "react";
 import Image from "next/image";
+import { Canvas } from "@react-three/fiber";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
+import PcScene from "@/components/pc/PcScene";
 
 export default function page() {
   return (
@@ -37,7 +41,11 @@ export default function page() {
           </div>
         </div>
         <div className="flex justify-between items-center w-full gap-6 h-full">
-          <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl"></div>
+          <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl">
+            <Canvas style={{ width: '100%', height: '100%' }} gl={{ alpha: true, antialias: true }}>
+              <PcScene />
+            </Canvas>
+          </div>
           <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
