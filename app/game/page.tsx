@@ -74,7 +74,14 @@ function GameContent() {
             className="flex items-center gap-4 font-pixelify cursor-pointer whitespace-nowrap shrink-0"
             href="/"
           >
-            <div className="w-10 h-10 bg-white"></div>
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/images/logo.png"
+                alt="Logo NIRD Advisor"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h1>NIRD Advisor</h1>
           </Link>
           <div className="flex w-full gap-5 justify-end">
@@ -153,7 +160,9 @@ function GameContent() {
           )}
         </div>
         <div className="px-5 w-full">
+
           <Button className="w-full" href={"/bilan"}>
+
             Voir mon bilan
           </Button>
         </div>

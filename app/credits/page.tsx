@@ -182,25 +182,25 @@ export default function CreditsPage() {
                   />
                 </a>
               </div>
-
-              {/* Clément OGE */}
+              {/* Ambre PETIT */}
               <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
                 <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
-                    alt="Clément OGE"
-                    src="/images/clement.jpg"
+                    alt="Ambre PETIT"
+                    src="/images/ambre.jpg"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
-                  Clément OGE
+                  Ambre PETIT
                 </p>
                 <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
-                  aka &quot;sympa cette API maintenant essayons de la DDoS&quot;
+                  aka &quot;la hackeuse aux goûts douteux parce que 7FFF00
+                  c&apos;est vraiment moche&quot;
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/coge/"
+                  href="https://www.linkedin.com/in/ambre-petit-7aa784290/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-[40px] h-[40px] cursor-pointer"
@@ -213,6 +213,8 @@ export default function CreditsPage() {
                   />
                 </a>
               </div>
+
+
 
               {/* Maël ADVISSE */}
               <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
@@ -245,25 +247,24 @@ export default function CreditsPage() {
                 </a>
               </div>
 
-              {/* Ambre PETIT */}
+              {/* Clément OGE */}
               <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
                 <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
-                    alt="Ambre PETIT"
-                    src="/images/ambre.jpg"
+                    alt="Clément OGE"
+                    src="/images/clement.jpg"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
-                  Ambre PETIT
+                  Clément OGE
                 </p>
                 <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
-                  aka &quot;la hackeuse aux goûts douteux parce que 7FFF00
-                  c&apos;est vraiment moche&quot;
+                  aka &quot;sympa cette API maintenant essayons de la DDoS&quot;
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/ambre-petit-7aa784290/"
+                  href="https://www.linkedin.com/in/coge/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-[40px] h-[40px] cursor-pointer"
@@ -276,6 +277,8 @@ export default function CreditsPage() {
                   />
                 </a>
               </div>
+
+
 
               {/* Louison BEDNAROWICZ */}
               <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
