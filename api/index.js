@@ -1,3 +1,4 @@
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const { v1: uuidv1 } = require('uuid');
@@ -10,6 +11,7 @@ const PORT = 3000;
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(cookieParser());
 app.use(express.json());
 
