@@ -4,6 +4,8 @@ import React from "react";
 import Button from "@/components/Button";
 import { clickHandler } from "./Click";
 import { useGame } from "./GameProvider";
+import { Canvas } from "@react-three/fiber";
+import PcScene from "@/components/pc/PcScene";
 
 export default function ClickerZone() {
   const { updateCurrency } = useGame();
@@ -15,9 +17,13 @@ export default function ClickerZone() {
 
   return (
     <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl">
-      <Button onClick={handleClick}>
-        <h1>Click me!</h1>
-      </Button>
+      <Canvas
+        onClick={handleClick}
+        style={{ width: "100%", height: "100%" }}
+        gl={{ alpha: true, antialias: true }}
+      >
+        <PcScene />
+      </Canvas>
     </div>
   );
 }

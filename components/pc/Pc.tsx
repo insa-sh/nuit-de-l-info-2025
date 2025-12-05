@@ -1,5 +1,7 @@
+"use client";
+
 import * as THREE from "three";
-import React, { useRef, JSX, useState, useMemo, useEffect } from "react"; 
+import React, { useRef, JSX, useState, useMemo, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import gsap from "gsap";
@@ -71,13 +73,15 @@ function performUpgrade(
 // Composant pour les particules d'upgrade
 function UpgradeParticles({ isActive }: { isActive: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const particlesRef = useRef<Array<{
-    position: THREE.Vector3;
-    velocity: THREE.Vector3;
-    life: number;
-    maxLife: number;
-    color: THREE.Color;
-  }>>([]);
+  const particlesRef = useRef<
+    Array<{
+      position: THREE.Vector3;
+      velocity: THREE.Vector3;
+      life: number;
+      maxLife: number;
+      color: THREE.Color;
+    }>
+  >([]);
   const hasSpawnedRef = useRef(false);
 
   const particleCount = 100;
@@ -86,9 +90,9 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
     const geo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
-    
-    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const mat = new THREE.PointsMaterial({
       size: 0.3,
@@ -107,12 +111,12 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = 0.3 + Math.random() * 0.5;
-      
+
       // Créer une couleur aléatoire
       const color = new THREE.Color();
       const hue = Math.random(); // 0 à 1 pour toute la gamme de couleurs
       color.setHSL(hue, 0.8 + Math.random() * 0.2, 0.5 + Math.random() * 0.3);
-      
+
       newParticles.push({
         position: new THREE.Vector3(0, 0, -2),
         velocity: new THREE.Vector3(
@@ -153,7 +157,7 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
 
       if (p.life > 0) {
         p.position.add(p.velocity);
-        
+
         const idx = activeCount * 3;
         positions[idx] = p.position.x;
         positions[idx + 1] = p.position.y;
@@ -167,7 +171,7 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
       }
     }
 
-    particlesRef.current = particles.filter(p => p.life > 0);
+    particlesRef.current = particles.filter((p) => p.life > 0);
 
     geometry.attributes.position.needsUpdate = true;
     geometry.attributes.color.needsUpdate = true;
@@ -186,7 +190,7 @@ let clickTimeline: gsap.core.Timeline | null = null;
 
 function performClickAnimation(ref: React.RefObject<THREE.Mesh>) {
   if (!ref.current) return;
-  
+
   // Créer la timeline une seule fois
   if (!clickTimeline) {
     clickTimeline = gsap.timeline({ paused: true });
@@ -200,13 +204,15 @@ function performClickAnimation(ref: React.RefObject<THREE.Mesh>) {
       repeat: 1,
     });
   }
-  
+
   // Redémarrer la timeline depuis le début
   clickTimeline.restart();
 }
 
 export function Pc(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF('/models/old_pc.glb') as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "/models/old_pc.glb"
+  ) as unknown as GLTFResult;
 
   const ref = useRef<THREE.Mesh>(null);
   const [isUpgrading, setIsUpgrading] = useState(false);
@@ -252,37 +258,76 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
   return (
     <>
       <UpgradeParticles isActive={isUpgrading} />
-      <group 
-        {...props} 
-        ref={ref} 
-        dispose={null} 
+      <group
+        {...props}
+        ref={ref}
+        dispose={null}
         position={[0, 0, -37]}
         onClick={handleClick}
-        onPointerOver={() => document.body.style.cursor = 'pointer'}
-        onPointerOut={() => document.body.style.cursor = 'default'}
+        onPointerOver={() => (document.body.style.cursor = "pointer")}
+        onPointerOut={() => (document.body.style.cursor = "default")}
       >
-        <group rotation={[-Math.PI / 2, 0, 0]} position={[-19.91, -10.50, 20.88]}>
+        <group
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[-19.91, -10.5, 20.88]}
+        >
           <group position={[0, 0, 0]}>
-            <mesh geometry={nodes.Object_5.geometry} material={materials.VoxMaterial_64} />
-            <mesh geometry={nodes.Object_6.geometry} material={materials.VoxMaterial_72} />
-            <mesh geometry={nodes.Object_7.geometry} material={materials.VoxMaterial_86} />
-            <mesh geometry={nodes.Object_8.geometry} material={materials.VoxMaterial_87} />
-            <mesh geometry={nodes.Object_9.geometry} material={materials.VoxMaterial_88} />
-            <mesh geometry={nodes.Object_10.geometry} material={materials.VoxMaterial_95} />
-            <mesh geometry={nodes.Object_11.geometry} material={materials.VoxMaterial_96} />
-            <mesh geometry={nodes.Object_12.geometry} material={materials.VoxMaterial_112} />
-            <mesh geometry={nodes.Object_13.geometry} material={materials.VoxMaterial_128} />
-            <mesh geometry={nodes.Object_14.geometry} material={materials.VoxMaterial_136} />
-            <mesh geometry={nodes.Object_15.geometry} material={materials.VoxMaterial_160} />
-            <mesh geometry={nodes.Object_16.geometry} material={materials.VoxMaterial_168} />
+            <mesh
+              geometry={nodes.Object_5.geometry}
+              material={materials.VoxMaterial_64}
+            />
+            <mesh
+              geometry={nodes.Object_6.geometry}
+              material={materials.VoxMaterial_72}
+            />
+            <mesh
+              geometry={nodes.Object_7.geometry}
+              material={materials.VoxMaterial_86}
+            />
+            <mesh
+              geometry={nodes.Object_8.geometry}
+              material={materials.VoxMaterial_87}
+            />
+            <mesh
+              geometry={nodes.Object_9.geometry}
+              material={materials.VoxMaterial_88}
+            />
+            <mesh
+              geometry={nodes.Object_10.geometry}
+              material={materials.VoxMaterial_95}
+            />
+            <mesh
+              geometry={nodes.Object_11.geometry}
+              material={materials.VoxMaterial_96}
+            />
+            <mesh
+              geometry={nodes.Object_12.geometry}
+              material={materials.VoxMaterial_112}
+            />
+            <mesh
+              geometry={nodes.Object_13.geometry}
+              material={materials.VoxMaterial_128}
+            />
+            <mesh
+              geometry={nodes.Object_14.geometry}
+              material={materials.VoxMaterial_136}
+            />
+            <mesh
+              geometry={nodes.Object_15.geometry}
+              material={materials.VoxMaterial_160}
+            />
+            <mesh
+              geometry={nodes.Object_16.geometry}
+              material={materials.VoxMaterial_168}
+            />
           </group>
         </group>
       </group>
     </>
-  )
+  );
 }
 
-useGLTF.preload('/models/old_pc.glb')
+useGLTF.preload("/models/old_pc.glb");
 
 // Exporter la fonction d'upgrade et de click pour l'utiliser ailleurs
 // export { performUpgrade };

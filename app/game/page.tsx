@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Canvas } from "@react-three/fiber";
+
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
@@ -40,9 +40,6 @@ function GameContent() {
     fetchAvailableAmeliorations();
   }, []);
 
-import PcScene from "@/components/pc/PcScene";
-
-
   return (
     <div className="flex flex-col w-screen h-screen p-7 gap-6 lg:flex-row">
       <div className="flex flex-col justify-center items-start h-full w-full gap-6 flex-1">
@@ -55,7 +52,10 @@ import PcScene from "@/components/pc/PcScene";
             <h1>NIRD Advisor</h1>
           </Link>
           <div className="flex w-full gap-5 justify-end">
-            <Link href="/bilan" className="flex w-full flex-col hidden lg:inline cursor-pointer">
+            <Link
+              href="/bilan"
+              className="flex w-full flex-col hidden lg:inline cursor-pointer"
+            >
               <p className="text-sm">Ma progression</p>
               <div className="w-full bg-fill-press rounded-full h-6 mt-1">
                 <div
@@ -71,7 +71,10 @@ import PcScene from "@/components/pc/PcScene";
             </Button>
           </div>
         </div>
-        <Link href="/bilan" className="flex w-full flex-col lg:hidden cursor-pointer">
+        <Link
+          href="/bilan"
+          className="flex w-full flex-col lg:hidden cursor-pointer"
+        >
           <p className="text-sm">Ma progression</p>
           <div className="w-full bg-fill-press rounded-full h-6 mt-1">
             <div
@@ -83,14 +86,7 @@ import PcScene from "@/components/pc/PcScene";
           </div>
         </Link>
         <div className="flex justify-between items-center w-full gap-6 h-full">
-
           <ClickerZone />
-
-          <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl">
-            <Canvas style={{ width: '100%', height: '100%' }} gl={{ alpha: true, antialias: true }}>
-              <PcScene />
-            </Canvas>
-          </div>
 
           <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
             <Badge image={"/badge.svg"} />
@@ -128,7 +124,7 @@ import PcScene from "@/components/pc/PcScene";
                   cost={amelioration.cost}
                   iconSrc={"/coin.svg"}
                   id={amelioration.id}
-                  cps={0}
+                  cps={amelioration.cps}
                   multiplier={amelioration.multiplier}
                   onPurchase={fetchAvailableAmeliorations}
                 />

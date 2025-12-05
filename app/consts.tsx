@@ -4,7 +4,7 @@ export const ameliorations = [
     title: "Eteindre les appareils pendant la nuit",
     icone: "/images/computer2.jpg",
     cost: 20,
-    nombre_pieces_par_seconde: 1,
+    cps: 1,
     multiplier: 1,
     choix: [
       {
@@ -20,7 +20,7 @@ export const ameliorations = [
       "Utiliser des authentifications par mot de passe au lieu de de l’authentification globale de Google",
     icone: "/images/password.jpg",
     cost: 100,
-    nombre_pieces_par_seconde: 5,
+    cps: 5,
     multiplier: 5,
     choix: [
       {
@@ -35,7 +35,7 @@ export const ameliorations = [
     title: "Utiliser un navigateur open source",
     icone: "",
     cost: 500,
-    nombre_pieces_par_seconde: 10,
+    cps: 10,
     multiplier: 5,
     choix: [
       {
@@ -63,7 +63,7 @@ export const ameliorations = [
     title: "Utiliser LibreOffice",
     icone: "/images/libreoffice.svg",
     cost: 1000,
-    nombre_pieces_par_seconde: 10,
+    cps: 10,
     multiplier: 15,
     choix: [
       {
@@ -78,7 +78,7 @@ export const ameliorations = [
     title: "Configurer AdBlock, refuser les cookies inutile, lire les CGU",
     icone: "/images/ublockorigin.png",
     cost: 5000,
-    nombre_pieces_par_seconde: 30,
+    cps: 30,
     multiplier: 25,
     choix: [
       {
@@ -93,7 +93,7 @@ export const ameliorations = [
     title: "Reparer au lieu de jeter et donner une seconde vie aux appareils",
     icone: "/images/fixing pc.png",
     cost: 25000,
-    nombre_pieces_par_seconde: 35,
+    cps: 35,
     multiplier: 30,
     choix: [
       {
@@ -108,7 +108,7 @@ export const ameliorations = [
     title: "Installer un système d’exploitation open source",
     icone: "/images/tux.png",
     cost: 100000,
-    nombre_pieces_par_seconde: 50,
+    cps: 50,
     multiplier: 40,
     choix: [
       {
@@ -136,7 +136,7 @@ export const ameliorations = [
     title: "Changer de fournisseur mail",
     icone: "/images/mail.png",
     cost: 200000,
-    nombre_pieces_par_seconde: 75,
+    cps: 75,
     multiplier: 75,
     choix: [
       {
@@ -158,7 +158,7 @@ export const ameliorations = [
     title: "Utiliser des store alternatifs",
     icone: "/images/degoogled.webp",
     cost: 500000,
-    nombre_pieces_par_seconde: 100,
+    cps: 100,
     multiplier: 100,
     choix: [
       {
@@ -174,7 +174,7 @@ export const ameliorations = [
     title: "MicroG",
     icone: "/images/microg.png",
     cost: 1000000,
-    nombre_pieces_par_seconde: 500,
+    cps: 500,
     multiplier: 250,
     choix: [
       {
@@ -190,7 +190,7 @@ export const ameliorations = [
       "Changer de système d’exploitation sur son téléphone: GrapheneOS, LineageOS, eOS",
     icone: "/images/GrapheneOS.png",
     cost: 5000000,
-    nombre_pieces_par_seconde: 800,
+    cps: 800,
     multiplier: 500,
     choix: [
       {
@@ -206,7 +206,7 @@ export const ameliorations = [
     title: "Héberger ses propres services",
     icone: "/images/self_hosting.png",
     cost: 8000000,
-    nombre_pieces_par_seconde: 1000,
+    cps: 1000,
     multiplier: 1000,
     choix: [
       {
@@ -221,7 +221,7 @@ export const ameliorations = [
     title: "Acheter et installer son propre serveur",
     icone: "/images/hosting_server.png",
     cost: 10000000,
-    nombre_pieces_par_seconde: 1500,
+    cps: 1500,
     multiplier: 1500,
     choix: [
       {

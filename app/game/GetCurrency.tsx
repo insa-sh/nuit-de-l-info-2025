@@ -12,6 +12,8 @@ export default async function getCurrency() {
   });
   const posts = await data.json();
 
+  console.log("je suis vie");
+
   cookieStore.set(
     "session",
     data.headers.get("Set-Cookie")?.split(";")[0].split("=")[1] ||
