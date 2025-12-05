@@ -97,7 +97,7 @@ export default function pageAccueil() {
               <p className='mb-0'>
                 <span>Grâce la </span>
                 <span className='font-bold'>démarche NDIR</span>
-                <span>, transformez vos systèmes et infrastructures informatiques poru les rendre autonome, responsables et indépendentes. Nous vous guidons pas-à-pas pour transformer votre parc informatique en un outil inclusif, durable et responsable. </span>
+                <span>, transformez vos systèmes et infrastructures informatiques pour les rendre autonome, responsables et indépendentes. Nous vous guidons pas-à-pas pour transformer votre parc informatique en un outil inclusif, durable et responsable. </span>
               </p>
               <p className='mb-0'>&nbsp;</p>
               <p className='leading-8'>

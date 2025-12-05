@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Pixelify_Sans, Anonymous_Pro } from "next/font/googl
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,12 +52,13 @@ export default function RootLayout({
             <div className="flex flex-col min-h-screen" style={{ backgroundColor: 'var(--color-background-base)' }}>
               <main className="flex-1">{children}</main>
               <footer className="flex items-center justify-center py-4">
-                <p 
+                <Link 
+                  href="/credits" 
                   className="font-bold text-white text-[14px]" 
                   style={{ fontFamily: 'var(--font-anonymous-pro)' }}
                 >
                   Crédits
-                </p>
+                </Link>
               </footer>
             </div>
           </NextIntlClientProvider>
