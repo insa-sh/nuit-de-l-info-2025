@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import * as THREE from "three"; 
+import * as THREE from "three";
 
 const PcLights = () => {
   return (
@@ -12,8 +14,8 @@ const PcLights = () => {
         penumbra={0.2}
         color={"white"}
       />
-      </>
-    );
+    </>
+  );
 };
 
 export default PcLights;

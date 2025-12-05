@@ -96,16 +96,6 @@ export default function InfoPopup({
 
         {/* Boutons */}
         <div className="flex flex-col md:flex-row gap-4 mt-4">
-          <Button
-            onClick={handleSecondaryClick}
-            variant="secondary"
-            className="flex-1"
-          >
-            <p className="text-[20px] md:text-[24px] font-normal text-center">
-              {secondaryButtonText}
-            </p>
-          </Button>
-
           <Button onClick={handlePrimaryClick} className="flex-1">
             <p className="text-white text-[20px] md:text-[24px] font-normal text-center">
               {primaryButtonText}
