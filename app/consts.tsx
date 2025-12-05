@@ -33,7 +33,7 @@ export const ameliorations = [
   {
     id: 3,
     title: "Utiliser un navigateur open source",
-    icone: "",
+    icone: "/images/chromium.png",
     cost: 500,
     cps: 10,
     multiplier: 5,

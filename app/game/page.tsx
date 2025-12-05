@@ -122,7 +122,7 @@ function GameContent() {
                   key={amelioration.id}
                   title={amelioration.title}
                   cost={amelioration.cost}
-                  iconSrc={"/coin.svg"}
+                  iconSrc={amelioration.icone}
                   id={amelioration.id}
                   cps={amelioration.cps}
                   multiplier={amelioration.multiplier}
