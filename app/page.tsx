@@ -3,9 +3,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Canvas } from "@react-three/fiber";
 import InfoPopup from "@/components/InfoPopup";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import { PcStatic } from "@/components/pc-static/PcStatic";
+import PcStaticScene from "@/components/pc-static/PcStaticScene";
 
 export default function pageAccueil() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -17,10 +20,6 @@ export default function pageAccueil() {
         <div className="flex items-center justify-between w-full">
           <Header />
 
-          {/* Bouton de test du popup */}
-          <Button onClick={() => setIsPopupOpen(true)}>
-            <p className="text-white text-[16px] font-normal">Test Popup</p>
-          </Button>
         </div>
 
         {/* Hero Section */}
@@ -35,14 +34,17 @@ export default function pageAccueil() {
             }}
           />
 
-          <div className="relative z-10">
-            <Image
+          <div className="relative z-10 w-screen">
+            {/* <Image
               src="/images/computer.png"
               alt="Computer"
               width={555}
               height={429}
               className="object-cover"
-            />
+            /> */}
+            <Canvas style={{ width: '100%', height: '400px' }} gl={{ alpha: true, antialias: true }}>
+              <PcStaticScene />
+            </Canvas>
           </div>
 
           <p className="text-white text-[32px] md:text-[48px] font-normal relative z-10 font-pixelify">
