@@ -41,7 +41,7 @@ type GLTFResult = GLTF & {
 
 // Fonction d'upgrade qui gère rotation et particules
 function performUpgrade(
-  ref: React.RefObject<THREE.Mesh>,
+  ref: React.RefObject<THREE.Mesh | null>,
   onParticlesStart: () => void,
   onParticlesEnd: () => void
 ) {
@@ -188,7 +188,7 @@ function UpgradeParticles({ isActive }: { isActive: boolean }) {
 // Timeline globale pour le click
 let clickTimeline: gsap.core.Timeline | null = null;
 
-function performClickAnimation(ref: React.RefObject<THREE.Mesh>) {
+function performClickAnimation(ref: React.RefObject<THREE.Mesh | null>) {
   if (!ref.current) return;
 
   // Créer la timeline une seule fois
@@ -250,7 +250,6 @@ export function Pc(props: JSX.IntrinsicElements["group"]) {
   // }, []);
 
   const handleClick = (event: THREE.Event) => {
-    event.stopPropagation();
     // Timeline du click uniquement (animation légère)
     performClickAnimation(ref);
   };

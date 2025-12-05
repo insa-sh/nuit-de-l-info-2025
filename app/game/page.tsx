@@ -160,7 +160,9 @@ function GameContent() {
           )}
         </div>
         <div className="px-5 w-full">
-          <Button className="w-full text-center" href="/bilan">
+
+          <Button className="w-full" href={"/bilan"}>
+
             Voir mon bilan
           </Button>
         </div>

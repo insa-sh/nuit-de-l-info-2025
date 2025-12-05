@@ -34,7 +34,7 @@ const anonymousPro = Anonymous_Pro({
 
 export const metadata: Metadata = {
   title: "NIRD Advisor",
-  description: "Created by ./insa.sh - Le CLub Info",
+  description: "Votre jeu pour une souveraineté numérique !",
 };
 
 export default function RootLayout({
