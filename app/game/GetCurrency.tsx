@@ -2,16 +2,15 @@
 
 import { cookies } from "next/headers";
 
-export default async function initApi() {
+export default async function getCurrency() {
   const cookieStore = await cookies();
 
-  const data = await fetch("http://localhost:3001/user", {
+  const data = await fetch("http://localhost:3001/balance", {
     headers: {
       Cookie: `session=${cookieStore.get("session")?.value || ""}`,
     },
   });
   const posts = await data.json();
-  console.log("Fetched init data:", posts);
 
   cookieStore.set(
     "session",

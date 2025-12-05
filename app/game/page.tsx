@@ -2,16 +2,38 @@
 
 import Button from "@/components/Button";
 import Header from "@/components/Header";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
 import ClickerZone from "./ClickerZone";
 import { GameProvider, useGame } from "./GameProvider";
+import getCurrency from "./GetCurrency";
+import { ameliorations } from "../consts";
+import initApi from "./InitApi";
 
 function GameContent() {
-  const { currency } = useGame();
+  const { currency, refreshData } = useGame();
+  const [availableAmeliorations, setAvailableAmeliorations] =
+    useState(ameliorations);
+
+  const fetchAvailableAmeliorations = async () => {
+    let data = await initApi();
+    console.log("Fetched user data:", data);
+
+    if (data && data.purchases && Array.isArray(data.purchases)) {
+      // Filtrer les améliorations déjà achetées
+      const purchased = data.purchases.map((u: any) => u.id);
+      const available = ameliorations.filter((a) => !purchased.includes(a.id));
+      setAvailableAmeliorations(available);
+      console.log("Available improvements:", available);
+    }
+  };
+
+  useEffect(() => {
+    fetchAvailableAmeliorations();
+  }, []);
 
   return (
     <div className="flex flex-col w-screen h-screen p-7 gap-6 lg:flex-row">
@@ -65,30 +87,27 @@ function GameContent() {
               <Image src={"/coin.svg"} width={22} height={20} alt={""}></Image>
             </div>
           </div>
-          <Amelioration
-            title={"Example"}
-            cost={1}
-            iconSrc={"/coin.svg"}
-            id={1}
-            cps={1}
-            multiplier={1}
-          />
-          <Amelioration
-            title={"Example"}
-            cost={1}
-            iconSrc={"/coin.svg"}
-            id={2}
-            cps={2}
-            multiplier={2}
-          />
-          <Amelioration
-            title={"Example"}
-            cost={1}
-            iconSrc={"/coin.svg"}
-            id={3}
-            cps={3}
-            multiplier={3}
-          />
+          {availableAmeliorations.length === 0 ? (
+            <div className="flex flex-col items-center justify-center p-8 text-center">
+              <h3 className="text-xl font-bold mb-2">Bravo !</h3>
+              <p className="text-sm text-gray-400">Tout est fini !</p>
+            </div>
+          ) : (
+            availableAmeliorations
+              .slice(0, 3)
+              .map((amelioration) => (
+                <Amelioration
+                  key={amelioration.id}
+                  title={amelioration.title}
+                  cost={amelioration.cost}
+                  iconSrc={"/coin.svg"}
+                  id={amelioration.id}
+                  cps={0}
+                  multiplier={amelioration.multiplier}
+                  onPurchase={fetchAvailableAmeliorations}
+                />
+              ))
+          )}
         </div>
         <div className="px-5 w-full">
           <Button className="w-full text-center">

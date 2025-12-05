@@ -26,5 +26,5 @@ export async function acheter({
     },
   });
 
-  console.log("Purchase response status:", await data.text());
+  await console.log("Purchase response status:", await data.status);
 }

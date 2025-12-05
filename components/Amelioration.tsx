@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { acheter } from "@/app/game/Acheter";
+import { useGame } from "@/app/game/GameProvider";
 
 export default function Amelioration({
   title,
@@ -11,6 +12,7 @@ export default function Amelioration({
   id,
   cps,
   multiplier,
+  onPurchase,
 }: {
   title: string;
   cost: number;
@@ -18,10 +20,21 @@ export default function Amelioration({
   id: number;
   cps: number;
   multiplier: number;
+  onPurchase?: () => void;
 }) {
+  const { refreshData } = useGame();
+
+  const handleClick = async () => {
+    await acheter({ cost, id, cps, multiplier });
+    await refreshData();
+    if (onPurchase) {
+      onPurchase();
+    }
+  };
+
   return (
     <div
-      onClick={() => acheter({ cost, id, cps, multiplier })}
+      onClick={handleClick}
       className="flex justify-center items-center gap-4 bg-background-overlay px-6 py-4 border-b border-stroke-weak w-full hover:bg-brand-1000/30 cursor-pointer transition-colors"
     >
       <Image src={iconSrc} alt={title} width={40} height={40} />

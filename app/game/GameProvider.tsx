@@ -1,11 +1,12 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import initApi from "./InitApi";
+import getCurrency from "./GetCurrency";
 
 interface GameContextType {
   currency: number;
   updateCurrency: () => Promise<void>;
+  refreshData: () => Promise<any>;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -14,10 +15,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [currency, setCurrency] = useState(0);
 
   const updateCurrency = async () => {
-    const data = await initApi();
+    const data = await getCurrency();
     if (data && typeof data.currency === "number") {
       setCurrency(data.currency);
     }
+    return data;
+  };
+
+  const refreshData = async () => {
+    return await updateCurrency();
   };
 
   useEffect(() => {
@@ -26,12 +32,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
     // Mise à jour périodique toutes les secondes
     const interval = setInterval(updateCurrency, 1000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (
-    <GameContext.Provider value={{ currency, updateCurrency }}>
+    <GameContext.Provider value={{ currency, updateCurrency, refreshData }}>
       {children}
     </GameContext.Provider>
   );
