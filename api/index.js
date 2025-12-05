@@ -6,6 +6,7 @@ const MAX_CURRENCY = 1e300;
 
 const admin_id = uuidv1();
 const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
+
 const PORT = 3000;
 
 const app = express();
@@ -131,7 +132,7 @@ function get_date_obj(uuid_str) {
     ].join(''),
     int_time = parseInt(time_str, 16) - 122192928000000000,
     int_millisec = Math.floor(int_time / 10000);
-  
+
   return new Date(int_millisec);
 }
 
