@@ -12,7 +12,7 @@ export default function page() {
       <div className="flex flex-col justify-center items-start h-full w-full gap-6 flex-1">
         <div className="flex justify-between gap-8 w-full items-center">
           <Link
-            className="flex items-center gap-4 font-pixelify cursor-pointer"
+            className="flex items-center gap-4 font-pixelify cursor-pointer whitespace-nowrap shrink-0"
             href="/"
           >
             <div className="w-10 h-10 bg-white"></div>
