@@ -105,14 +105,14 @@ export default function CreditsPage() {
 
         {/* Team Section */}
         <div className="flex flex-col gap-[64px] items-center justify-center overflow-hidden p-[64px] rounded-[64px] w-full">
-          <div className="relative w-[896px] h-[370px]">
+          {/* <div className="relative w-[896px] h-[370px]">
             <Image
               alt="Logo NDIR"
               src="/images/ndir-logo.png"
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
           <div className="flex flex-col gap-[20px] items-center w-full">
             <p className="font-pixelify font-normal text-[48px] text-center text-white w-full leading-normal">
               La fine équipe, la voici, la voilà !
