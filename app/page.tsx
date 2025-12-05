@@ -17,10 +17,6 @@ export default function pageAccueil() {
         <div className="flex items-center justify-between w-full">
           <Header />
 
-          {/* Bouton de test du popup */}
-          <Button onClick={() => setIsPopupOpen(true)}>
-            <p className="text-white text-[16px] font-normal">Test Popup</p>
-          </Button>
         </div>
 
         {/* Hero Section */}

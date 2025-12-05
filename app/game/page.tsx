@@ -1,5 +1,4 @@
 import Button from "@/components/Button";
-import Header from "@/components/Header";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +11,13 @@ export default function page() {
     <div className="flex flex-col w-screen h-screen p-7 gap-6 lg:flex-row">
       <div className="flex flex-col justify-center items-start h-full w-full gap-6 flex-1">
         <div className="flex justify-between gap-8 w-full items-center">
-          <Header></Header>
+          <Link
+            className="flex items-center gap-4 font-pixelify cursor-pointer"
+            href="/"
+          >
+            <div className="w-10 h-10 bg-white"></div>
+            <h1>NIRD Advisor</h1>
+          </Link>
           <div className="flex w-full gap-5 justify-end">
             <Link href="/bilan" className="flex w-full flex-col hidden lg:inline cursor-pointer">
               <p className="text-sm">Ma progression</p>
