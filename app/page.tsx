@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function pageAccueil() {
   return (
-    <div className='flex flex-col gap-6 items-center justify-center p-7 min-h-screen' style={{ backgroundColor: 'var(--color-background-base)' }}>
+    <div className='flex flex-col gap-6 items-center justify-center p-7'>
       <div className='flex flex-col gap-6 items-center w-full'>
         {/* Header */}
         <div className='flex items-center w-full'>
@@ -164,11 +164,6 @@ export default function pageAccueil() {
           </div>
         </div>
       </div>
-      
-      {/* Footer */}
-      <p className='font-bold text-white text-[14px]' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
-        Crédits
-      </p>
     </div>
   )
 }

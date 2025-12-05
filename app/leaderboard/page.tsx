@@ -17,8 +17,7 @@ export default function leaderboard() {
 
   return (
     <div 
-      className='flex flex-col gap-6 items-center justify-start p-7 min-h-screen'
-      style={{ backgroundColor: 'var(--color-background-base)' }}
+      className='flex flex-col gap-6 items-center justify-start p-7'
     >
       {/* Header */}
       <div className='flex items-center justify-between w-full max-w-[1200px]'>
@@ -53,14 +52,6 @@ export default function leaderboard() {
           />
         ))}
       </div>
-
-      {/* Footer */}
-      <p 
-        className='font-bold text-white text-[14px] mt-8'
-        style={{ fontFamily: 'var(--font-anonymous-pro)' }}
-      >
-        Crédits
-      </p>
     </div>
   )
 }

@@ -47,7 +47,19 @@ export default function RootLayout({
           themes={["light", "dark", "theme-blue", "theme-green", "theme-red"]}
           storageKey="theme"
         >
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider>
+            <div className="flex flex-col min-h-screen" style={{ backgroundColor: 'var(--color-background-base)' }}>
+              <main className="flex-1">{children}</main>
+              <footer className="flex items-center justify-center py-4">
+                <p 
+                  className="font-bold text-white text-[14px]" 
+                  style={{ fontFamily: 'var(--font-anonymous-pro)' }}
+                >
+                  Crédits
+                </p>
+              </footer>
+            </div>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
