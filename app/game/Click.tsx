@@ -9,4 +9,5 @@ export async function clickHandler() {
       Cookie: `session=${cookieStore.get("session")?.value || ""}`,
     },
   });
+  return await data.text();
 }

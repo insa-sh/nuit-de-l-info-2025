@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import React from "react";
@@ -6,8 +8,11 @@ import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
 import ClickerZone from "./ClickerZone";
+import { GameProvider, useGame } from "./GameProvider";
 
-export default function page() {
+function GameContent() {
+  const { currency } = useGame();
+
   return (
     <div className="flex flex-col w-screen h-screen p-7 gap-6 lg:flex-row">
       <div className="flex flex-col justify-center items-start h-full w-full gap-6 flex-1">
@@ -38,7 +43,7 @@ export default function page() {
           </div>
         </div>
         <div className="flex justify-between items-center w-full gap-6 h-full">
-          <ClickerZone></ClickerZone>
+          <ClickerZone />
           <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
@@ -56,7 +61,7 @@ export default function page() {
           <div className="flex p-4 border-b border-stroke-weak justify-between w-full items-center ">
             <h3>Améliorations</h3>
             <div className="flex p-1.5 justify-center items-center gap-1.5">
-              <h4 className="text-fill-yellow!">12 000</h4>
+              <h4 className="text-fill-yellow!">{currency.toLocaleString()}</h4>
               <Image src={"/coin.svg"} width={22} height={20} alt={""}></Image>
             </div>
           </div>
@@ -92,5 +97,13 @@ export default function page() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <GameProvider>
+      <GameContent />
+    </GameProvider>
   );
 }
