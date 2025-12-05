@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import Header from "@/components/Header";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
@@ -13,7 +14,7 @@ export default function page() {
         <div className="flex justify-between gap-8 w-full items-center">
           <Header></Header>
           <div className="flex w-full gap-5 justify-end">
-            <div className="flex w-full flex-col hidden lg:inline">
+            <Link href="/bilan" className="flex w-full flex-col hidden lg:inline cursor-pointer">
               <p className="text-sm">Ma progression</p>
               <div className="w-full bg-fill-press rounded-full h-6 mt-1">
                 <div
@@ -21,13 +22,13 @@ export default function page() {
                   style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
                 ></div>
               </div>
-            </div>
+            </Link>
             <Button href="/leaderboard">
               <FaTrophy className="text-white text-2xl"></FaTrophy>
             </Button>
           </div>
         </div>
-        <div className="flex w-full  flex-col lg:hidden">
+        <Link href="/bilan" className="flex w-full flex-col lg:hidden cursor-pointer">
           <p className="text-sm">Ma progression</p>
           <div className="w-full bg-fill-press rounded-full h-6 mt-1">
             <div
@@ -35,7 +36,7 @@ export default function page() {
               style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
             ></div>
           </div>
-        </div>
+        </Link>
         <div className="flex justify-between items-center w-full gap-6 h-full">
           <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl"></div>
           <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
