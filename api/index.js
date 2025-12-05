@@ -1,17 +1,28 @@
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const express = require('express');
-const { v1: uuidv1 } = require('uuid');
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const express = require("express");
+const { v1: uuidv1 } = require("uuid");
 
 const MAX_CURRENCY = 1e300;
 
 const admin_id = uuidv1();
-const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
-const PORT = 3000;
+const users = {
+  [admin_id]: {
+    username: "admin",
+    last_seen: new Date(),
+    creation_date: get_date_obj(admin_id),
+    currency: 1e100,
+    cps: 0,
+    multiplier: 1,
+    purchases: [],
+    flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}",
+  },
+};
+const PORT = 3001;
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(cookieParser());
 app.use(express.json());
 
@@ -29,7 +40,7 @@ async function identify_user(req, res, next) {
       purchases: [],
     };
 
-    res.cookie('session', session_id);
+    res.cookie("session", session_id);
   }
 
   req.session = users[session_id];
@@ -47,7 +58,10 @@ app.get("/balance", identify_user, async (req, res) => {
   const session = req.session;
 
   const elapsedSeconds = (now - session.last_seen) / 1000;
-  session.currency = Math.min(session.currency + session.cps * elapsedSeconds, MAX_CURRENCY);
+  session.currency = Math.min(
+    session.currency + session.cps * elapsedSeconds,
+    MAX_CURRENCY
+  );
 
   res.json({ currency: Math.floor(req.session.currency) });
   req.session.last_seen = new Date();
@@ -60,7 +74,13 @@ app.get("/user", identify_user, async (req, res) => {
 
 app.post("/purchase", identify_user, async (req, res) => {
   const body = req.body;
-  if (typeof body !== "object" || typeof body.id !== 'number' || typeof body.cost !== 'number' || typeof body.cps !== 'number' || typeof body.multiplier !== "number") {
+  if (
+    typeof body !== "object" ||
+    typeof body.id !== "number" ||
+    typeof body.cost !== "number" ||
+    typeof body.cps !== "number" ||
+    typeof body.multiplier !== "number"
+  ) {
     res.status(400).json({ error: "Invalid request input." });
     return;
   }
@@ -70,7 +90,7 @@ app.post("/purchase", identify_user, async (req, res) => {
     return;
   }
 
-  if (req.session.purchases.find(p => p.id === body.id)) {
+  if (req.session.purchases.find((p) => p.id === body.id)) {
     res.status(400).json({ error: "Item already purchased." });
     return;
   }
@@ -97,7 +117,11 @@ app.post("/purchase", identify_user, async (req, res) => {
 
 app.post("/claim_username", identify_user, async (req, res) => {
   const body = req.body;
-  if (typeof body !== "object" || typeof body.username !== 'string' || body.username.length !== 8) {
+  if (
+    typeof body !== "object" ||
+    typeof body.username !== "string" ||
+    body.username.length !== 8
+  ) {
     res.status(400).json({ error: "Invalid username." });
     return;
   }
@@ -109,9 +133,9 @@ app.post("/claim_username", identify_user, async (req, res) => {
 
 app.get("/scoreboard", async (req, res) => {
   const scoreboard = Object.values(users)
-    .filter(u => u.username)
+    .filter((u) => u.username)
     .sort((a, b) => b.currency - a.currency)
-    .map(u => ({
+    .map((u) => ({
       username: u.username,
       currency: Math.floor(u.currency),
       created_at: u.creation_date,
@@ -125,15 +149,10 @@ app.listen(PORT, () => {
 });
 
 function get_date_obj(uuid_str) {
-  const uuid_arr = uuid_str.split('-'),
-    time_str = [
-      uuid_arr[2].substring(1),
-      uuid_arr[1],
-      uuid_arr[0]
-    ].join(''),
+  const uuid_arr = uuid_str.split("-"),
+    time_str = [uuid_arr[2].substring(1), uuid_arr[1], uuid_arr[0]].join(""),
     int_time = parseInt(time_str, 16) - 122192928000000000,
     int_millisec = Math.floor(int_time / 10000);
-  
+
   return new Date(int_millisec);
 }
-

@@ -3,7 +3,7 @@ import Link from "next/link";
 import LeaderboardRow from "@/components/LeaderboardRow";
 import Header from "@/components/Header";
 
-export default function leaderboard() {
+export default async function leaderboard() {
   // Données du leaderboard (à remplacer par des vraies données de l'API plus tard)
   const leaderboardData = [
     { rank: 1, username: "BAPTISTE", date: "08/12/2023 12:30", score: 3000 },
@@ -15,6 +15,10 @@ export default function leaderboard() {
     { rank: 7, username: "BAPTISTE", date: "08/12/2023 12:30", score: 3000 },
     { rank: 8, username: "BAPTISTE", date: "08/12/2023 12:30", score: 3000 },
   ];
+
+  const leaderboard = await fetch("http://localhost:3001/scoreboard");
+  const leaderboardJson = await leaderboard.json();
+  console.log(leaderboardJson);
 
   return (
     <div className="flex flex-col gap-6 items-center justify-start p-7">

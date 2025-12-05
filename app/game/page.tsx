@@ -5,6 +5,7 @@ import Image from "next/image";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
+import ClickerZone from "./ClickerZone";
 
 export default function page() {
   return (
@@ -37,7 +38,7 @@ export default function page() {
           </div>
         </div>
         <div className="flex justify-between items-center w-full gap-6 h-full">
-          <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl"></div>
+          <ClickerZone></ClickerZone>
           <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
@@ -59,9 +60,30 @@ export default function page() {
               <Image src={"/coin.svg"} width={22} height={20} alt={""}></Image>
             </div>
           </div>
-          <Amelioration title={"Example"} cost={12000} iconSrc={"/coin.svg"} />
-          <Amelioration title={"Example"} cost={12000} iconSrc={"/coin.svg"} />
-          <Amelioration title={"Example"} cost={12000} iconSrc={"/coin.svg"} />
+          <Amelioration
+            title={"Example"}
+            cost={1}
+            iconSrc={"/coin.svg"}
+            id={1}
+            cps={1}
+            multiplier={1}
+          />
+          <Amelioration
+            title={"Example"}
+            cost={1}
+            iconSrc={"/coin.svg"}
+            id={2}
+            cps={2}
+            multiplier={2}
+          />
+          <Amelioration
+            title={"Example"}
+            cost={1}
+            iconSrc={"/coin.svg"}
+            id={3}
+            cps={3}
+            multiplier={3}
+          />
         </div>
         <div className="px-5 w-full">
           <Button className="w-full text-center">
