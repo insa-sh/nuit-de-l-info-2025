@@ -191,10 +191,12 @@ let clickTimeline: gsap.core.Timeline | null = null;
 function performClickAnimation(ref: React.RefObject<THREE.Mesh | null>) {
   if (!ref.current) return;
 
+  const mesh = ref.current;
+
   // Créer la timeline une seule fois
   if (!clickTimeline) {
     clickTimeline = gsap.timeline({ paused: true });
-    clickTimeline.to(ref.current.scale, {
+    clickTimeline.to(mesh.scale, {
       x: 1.05,
       y: 1.05,
       z: 1.05,
