@@ -19,7 +19,6 @@ export default function pageAccueil() {
         {/* Header */}
         <div className="flex items-center justify-between w-full">
           <Header />
-
         </div>
 
         {/* Hero Section */}
@@ -42,7 +41,10 @@ export default function pageAccueil() {
               height={429}
               className="object-cover"
             /> */}
-            <Canvas style={{ width: '100%', height: '400px' }} gl={{ alpha: true, antialias: true }}>
+            <Canvas
+              style={{ width: "100%", height: "400px" }}
+              gl={{ alpha: true, antialias: true }}
+            >
               <PcStaticScene />
             </Canvas>
           </div>
@@ -232,8 +234,6 @@ export default function pageAccueil() {
         imageSrc="/images/computer.png"
         primaryButtonText="C'est super !"
         secondaryButtonText="En savoir plus"
-        onPrimaryClick={() => console.log("Primary clicked")}
-        onSecondaryClick={() => console.log("Secondary clicked")}
       />
     </div>
   );

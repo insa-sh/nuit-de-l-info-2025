@@ -11,7 +11,6 @@ export default async function initApi() {
     },
   });
   const posts = await data.json();
-  console.log("Fetched init data:", posts);
 
   cookieStore.set(
     "session",

@@ -35,12 +35,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link
-        href={href}
-        target={target}
-        className={fullClassName}
-        style={{ textDecoration: "none" }}
-      >
+      <Link href={href} target={target} className={fullClassName}>
         {children}
       </Link>
     );

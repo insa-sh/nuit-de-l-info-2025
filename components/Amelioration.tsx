@@ -22,9 +22,14 @@ export default function Amelioration({
   multiplier: number;
   onPurchase?: () => void;
 }) {
-  const { refreshData } = useGame();
+  const { refreshData, currency } = useGame();
 
   const handleClick = async () => {
+    // Vérifier si l'utilisateur a assez d'argent
+    if (currency < cost) {
+      return; // Ne rien faire si pas assez d'argent
+    }
+
     await acheter({ cost, id, cps, multiplier });
     await refreshData();
     if (onPurchase) {

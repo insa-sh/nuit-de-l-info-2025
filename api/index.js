@@ -128,7 +128,6 @@ app.post("/claim_username", identify_user, async (req, res) => {
 
   req.session.username = body.username;
   res.json({ success: true, username: req.session.username });
-  console.log(users);
 });
 
 app.get("/scoreboard", async (req, res) => {

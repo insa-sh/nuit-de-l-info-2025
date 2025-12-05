@@ -33,28 +33,15 @@ export const ameliorations = [
   {
     id: 3,
     title: "Utiliser un navigateur open source",
-    icone: "/images/chromium.png",
+    icone: "/images/chromium.svg",
     cost: 500,
     cps: 10,
     multiplier: 5,
     choix: [
       {
-        nom: "Firefox",
+        nom: "",
         description:
-          "Navigateur complet, respectueux de la vie privée, soutenu par la fondation Mozilla.",
-        icone: "/images/firefox.svg",
-      },
-      {
-        nom: "Chromium",
-        description:
-          "Base open source de Google Chrome, rapide et largement compatible avec les standards du web.",
-        icone: "/images/chromium.svg",
-      },
-      {
-        nom: "Brave",
-        description:
-          "Navigateur axé sur la confidentialité, bloqueurs de pubs intégrés et performance optimisée.",
-        icone: "/images/brave.svg",
+          "Utiliser un navigateur open source comme Firefox, Chromium ou Brave permet de mieux protéger sa vie privée, de réduire la collecte de données et de bénéficier d'un contrôle accru sur sa navigation.",
       },
     ],
   },
@@ -78,8 +65,8 @@ export const ameliorations = [
     title: "Configurer AdBlock, refuser les cookies inutile, lire les CGU",
     icone: "/images/ublockorigin.png",
     cost: 5000,
-    cps: 30,
-    multiplier: 25,
+    cps: 50,
+    multiplier: 50,
     choix: [
       {
         nom: "",
@@ -92,9 +79,9 @@ export const ameliorations = [
     id: 6,
     title: "Reparer au lieu de jeter et donner une seconde vie aux appareils",
     icone: "/images/fixing pc.png",
-    cost: 25000,
-    cps: 35,
-    multiplier: 30,
+    cost: 20000,
+    cps: 50,
+    multiplier: 50,
     choix: [
       {
         nom: "",
@@ -140,16 +127,9 @@ export const ameliorations = [
     multiplier: 75,
     choix: [
       {
-        nom: "Proton mail",
+        nom: "",
         description:
-          "Service de mail chiffré de bout en bout (c’est à dire que seul vous et le destinataire pouvez voir le contenu des mails) qui vient avec toute une suite d’outils. Un très bon choix pour ajouter de la vie privée dans votre vie sans friction.",
-        icone: "/images/protonmail.png",
-      },
-      {
-        nom: "Murena",
-        description:
-          "Service mail basé en France, avec une infrastructure open source. N’est pas chiffré de bout en bout par défaut, mais permet de ne pas céder tout le contenu de ses mails pour de la publicité personnalisée.",
-        icone: "/images/murena.jpeg",
+          "Changer pour un service mail respectueux de la vie privée comme Proton Mail ou Murena permet de protéger le contenu de ses emails du ciblage publicitaire et de la collecte de données.",
       },
     ],
   },

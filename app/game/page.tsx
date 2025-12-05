@@ -11,6 +11,7 @@ import Link from "next/link";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
 import Badge from "@/components/Badge";
+import InfoPopup from "@/components/InfoPopup";
 
 import ClickerZone from "./ClickerZone";
 import { GameProvider, useGame } from "./GameProvider";
@@ -22,18 +23,32 @@ function GameContent() {
   const { currency, refreshData } = useGame();
   const [availableAmeliorations, setAvailableAmeliorations] =
     useState(ameliorations);
+  const [purchasedItem, setPurchasedItem] = useState<{
+    title: string;
+    description: string;
+    imageSrc: string;
+  } | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const fetchAvailableAmeliorations = async () => {
     let data = await initApi();
-    console.log("Fetched user data:", data);
 
     if (data && data.purchases && Array.isArray(data.purchases)) {
       // Filtrer les améliorations déjà achetées
       const purchased = data.purchases.map((u: any) => u.id);
       const available = ameliorations.filter((a) => !purchased.includes(a.id));
       setAvailableAmeliorations(available);
-      console.log("Available improvements:", available);
     }
+  };
+
+  const handlePurchase = (amelioration: (typeof ameliorations)[0]) => {
+    setPurchasedItem({
+      title: amelioration.title,
+      description:
+        amelioration.choix[0]?.description || "Amélioration achetée !",
+      imageSrc: amelioration.icone,
+    });
+    setIsPopupOpen(true);
   };
 
   useEffect(() => {
@@ -52,10 +67,7 @@ function GameContent() {
             <h1>NIRD Advisor</h1>
           </Link>
           <div className="flex w-full gap-5 justify-end">
-            <Link
-              href="/bilan"
-              className="flex w-full flex-col hidden lg:inline cursor-pointer"
-            >
+            <div className="flex w-full flex-col hidden lg:inline cursor-pointer">
               <p className="text-sm">Ma progression</p>
               <div className="w-full bg-fill-press rounded-full h-6 mt-1">
                 <div
@@ -65,16 +77,13 @@ function GameContent() {
                   }}
                 ></div>
               </div>
-            </Link>
+            </div>
             <Button href="/leaderboard">
               <FaTrophy className="text-white text-2xl"></FaTrophy>
             </Button>
           </div>
         </div>
-        <Link
-          href="/bilan"
-          className="flex w-full flex-col lg:hidden cursor-pointer"
-        >
+        <div className="flex w-full flex-col lg:hidden cursor-pointer">
           <p className="text-sm">Ma progression</p>
           <div className="w-full bg-fill-press rounded-full h-6 mt-1">
             <div
@@ -84,11 +93,11 @@ function GameContent() {
               }}
             ></div>
           </div>
-        </Link>
+        </div>
         <div className="flex justify-between items-center w-full gap-6 h-full">
           <ClickerZone />
 
-          <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
+          {/* <div className="lg:flex gap-4 hidden flex-col justify-start p-4 items-center bg-background-raised max-w-[126px] w-full h-full rounded-2xl">
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
@@ -97,7 +106,7 @@ function GameContent() {
             <Badge image={"/badge.svg"} />
             <Badge image={"/badge.svg"} />
             <h1>+4</h1>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col justify-between items-center w-full lg:max-w-[450px] pb-5 gap-6 lg:flex-1 bg-background-raised rounded-4xl">
@@ -115,28 +124,41 @@ function GameContent() {
               <p className="text-sm text-gray-400">Tout est fini !</p>
             </div>
           ) : (
-            availableAmeliorations
-              .slice(0, 3)
-              .map((amelioration) => (
-                <Amelioration
-                  key={amelioration.id}
-                  title={amelioration.title}
-                  cost={amelioration.cost}
-                  iconSrc={amelioration.icone}
-                  id={amelioration.id}
-                  cps={amelioration.cps}
-                  multiplier={amelioration.multiplier}
-                  onPurchase={fetchAvailableAmeliorations}
-                />
-              ))
+            availableAmeliorations.slice(0, 3).map((amelioration) => (
+              <Amelioration
+                key={amelioration.id}
+                title={amelioration.title}
+                cost={amelioration.cost}
+                iconSrc={amelioration.icone}
+                id={amelioration.id}
+                cps={amelioration.cps}
+                multiplier={amelioration.multiplier}
+                onPurchase={() => {
+                  handlePurchase(amelioration);
+                  fetchAvailableAmeliorations();
+                }}
+              />
+            ))
           )}
         </div>
         <div className="px-5 w-full">
-          <Button className="w-full text-center">
-            <h3>Mes Améliorations</h3>
+          <Button className="w-full text-center" href="/bilan">
+            <h3>Voir mon bilan</h3>
           </Button>
         </div>
       </div>
+
+      {purchasedItem && (
+        <InfoPopup
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          title={purchasedItem.title}
+          description={purchasedItem.description}
+          imageSrc={purchasedItem.imageSrc}
+          primaryButtonText="C'est super !"
+          secondaryButtonText="En savoir plus"
+        />
+      )}
     </div>
   );
 }

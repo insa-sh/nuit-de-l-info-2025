@@ -15,8 +15,6 @@ export async function acheter({
 }) {
   const cookieStore = await cookies();
 
-  console.log("hy");
-
   const data = await fetch("http://localhost:3001/purchase", {
     method: "POST",
     body: JSON.stringify({ cost, id, cps, multiplier }),
@@ -25,6 +23,4 @@ export async function acheter({
       "Content-Type": "application/json",
     },
   });
-
-  await console.log("Purchase response status:", await data.status);
 }

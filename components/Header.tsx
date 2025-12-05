@@ -12,9 +12,6 @@ export default function Header() {
         <div className="w-10 h-10 bg-white"></div>
         <h1>NIRD Advisor</h1>
       </Link>
-      <Button href="/bilan" variant="secondary" className="text-[16px]">
-        Mon bilan
-      </Button>
     </div>
   );
 }
