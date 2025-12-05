@@ -37,12 +37,12 @@ export default function pageAccueil() {
             />
           </div>
           
-          <p className='text-white text-[48px] font-normal relative z-10' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+          <p className='text-white text-[32px] md:text-[48px] font-normal relative z-10' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
             NDIR Advisor
           </p>
           
           <div className='flex flex-col items-center relative z-10'>
-            <p className='text-white text-[32px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+            <p className='text-white text-[24px] md:text-[32px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
               <span>Apprennez à </span>
               <span className='font-bold underline decoration-solid [text-underline-position:from-font]' style={{ color: '#53ac83' }}>
                 responsabiliser
@@ -51,7 +51,7 @@ export default function pageAccueil() {
             </p>
           </div>
           
-          <div className='flex gap-6 items-start justify-center relative z-10'>
+          <div className='flex flex-col md:flex-row gap-6 items-center md:items-start justify-center relative z-10'>
 
             <Link href="/game" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
               <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
@@ -59,14 +59,14 @@ export default function pageAccueil() {
               </p>
             </Link>
             
-            <Link href="/leaderboard" className='border-2 border-solid flex gap-2.5 items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-brand-weak)', borderColor: 'var(--color-stroke-selected)', textDecoration: 'none' }}>
+            <Link href="/leaderboard" className='border-2 border-solid flex gap-2.5 items-center justify-center px-6 md:px-8 py-3 md:py-4 rounded-[20px] overflow-hidden w-full md:w-auto' style={{ backgroundColor: 'var(--color-brand-weak)', borderColor: 'var(--color-stroke-selected)', textDecoration: 'none' }}>
               <Image 
               src="/images/trophy.svg" 
               alt="Trophy" 
               width={24} 
               height={24}
               />
-              <p className='text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)', color: 'var(--color-brand-1000)' }}>
+              <p className='text-[18px] md:text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)', color: 'var(--color-brand-1000)' }}>
               Leaderboard
               </p>
             </Link>
@@ -74,11 +74,11 @@ export default function pageAccueil() {
         </div>
 
         {/* NDIR Section */}
-        <div className='flex gap-16 items-center justify-center overflow-hidden p-16 rounded-[64px] w-full' style={{
+        <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full' style={{
               background: `
                 radial-gradient(94.61% 96.7% at 20.16% 47.05%, rgba(79, 0, 237, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%);`
             }}>
-          <div className='relative'>
+          <div className='relative flex-shrink-0'>
             <Image 
               src="/images/ndir-logo.png" 
               alt="NDIR Logo" 
@@ -89,11 +89,11 @@ export default function pageAccueil() {
           </div>
           
           <div className='flex flex-col gap-[79px] items-center flex-1' >
-            <p className='text-white text-[48px] font-normal w-full whitespace-pre-wrap' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+            <p className='text-white text-[32px] md:text-[48px] font-normal w-full' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
               NDIR - Inclusif, Responsable & Durable
             </p>
             
-            <div className='text-white text-[24px] leading-8 w-full whitespace-pre-wrap' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
+            <div className='text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
               <p className='mb-0'>
                 <span>Grâce la </span>
                 <span className='font-bold'>démarche NDIR</span>
@@ -109,8 +109,8 @@ export default function pageAccueil() {
               </p>
             </div>
             
-            <Link href="https://nird.forge.apps.education.fr/" target="_blank" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
-              <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+            <Link href="https://nird.forge.apps.education.fr/" target="_blank" className='flex items-center justify-center px-6 md:px-8 py-3 md:py-4 rounded-[20px] overflow-hidden w-full md:w-auto' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
+              <p className='text-white text-[18px] md:text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
               Voir le site de la NDIR →
               </p>
             </Link>
@@ -118,7 +118,7 @@ export default function pageAccueil() {
         </div>
 
         {/* Le Clicker NDIR Section */}
-        <div className='flex gap-16 items-center justify-center overflow-hidden p-16 rounded-[64px] w-full relative'>
+        <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full relative'>
           {/* Background gradients */}
           <div className='absolute inset-0 pointer-events-none' 
             style={{
@@ -127,21 +127,22 @@ export default function pageAccueil() {
             }}
           />
           
-          <div className='relative z-10'>
+          <div className='relative z-10 flex-shrink-0'>
             <Image 
               src="/images/cursor.png" 
               alt="Cursor" 
               width={320} 
               height={320}
+              className='w-[200px] h-[200px] lg:w-[320px] lg:h-[320px]'
             />
           </div>
           
           <div className='flex flex-col gap-[79px] items-center flex-1 relative z-10'>
-            <p className='text-white text-[48px] font-normal w-full whitespace-pre-wrap' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+            <p className='text-white text-[32px] md:text-[48px] font-normal w-full' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
               Le Clicker NDIR
             </p>
             
-            <div className='text-white text-[24px] leading-8 w-full whitespace-pre-wrap' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
+            <div className='text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full' style={{ fontFamily: 'var(--font-anonymous-pro)' }}>
               <p className='mb-0'>Connaissez-vous le jeu Cookie Clicker ? Un jeu simple et efficace. A chaque fois que le joueur clique sur le cookie, il gagne de l'argent. Avec cet argent, il peut améliorer ses clics, installer des clickers automatiques, ou des fermes à clic. Le but est d'obtenir toujours plus de clics.</p>
               <p className='mb-0'>&nbsp;</p>
               <p className='mb-0'>
@@ -155,8 +156,8 @@ export default function pageAccueil() {
               <p>Vous recevrez des conseils et un recap des actions que vous pouvez mettre en place pour améliorer vos parcs informatiques.</p>
             </div>
             
-            <Link href="/game" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
-              <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+            <Link href="/game" className='flex items-center justify-center px-6 md:px-8 py-3 md:py-4 rounded-[20px] overflow-hidden w-full md:w-auto' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
+              <p className='text-white text-[18px] md:text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
               Jouer →
               </p>
             </Link>
