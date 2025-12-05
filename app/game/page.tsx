@@ -1,9 +1,9 @@
 "use client";
 
 import Button from "@/components/Button";
-import Header from "@/components/Header";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
 import Amelioration from "@/components/Amelioration";
 import { FaTrophy } from "react-icons/fa";
@@ -15,9 +15,15 @@ export default function page() {
     <div className="flex flex-col w-screen h-screen p-7 gap-6 lg:flex-row">
       <div className="flex flex-col justify-center items-start h-full w-full gap-6 flex-1">
         <div className="flex justify-between gap-8 w-full items-center">
-          <Header></Header>
+          <Link
+            className="flex items-center gap-4 font-pixelify cursor-pointer whitespace-nowrap shrink-0"
+            href="/"
+          >
+            <div className="w-10 h-10 bg-white"></div>
+            <h1>NIRD Advisor</h1>
+          </Link>
           <div className="flex w-full gap-5 justify-end">
-            <div className="flex w-full flex-col hidden lg:inline">
+            <Link href="/bilan" className="flex w-full flex-col hidden lg:inline cursor-pointer">
               <p className="text-sm">Ma progression</p>
               <div className="w-full bg-fill-press rounded-full h-6 mt-1">
                 <div
@@ -25,13 +31,13 @@ export default function page() {
                   style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
                 ></div>
               </div>
-            </div>
+            </Link>
             <Button href="/leaderboard">
               <FaTrophy className="text-white text-2xl"></FaTrophy>
             </Button>
           </div>
         </div>
-        <div className="flex w-full  flex-col lg:hidden">
+        <Link href="/bilan" className="flex w-full flex-col lg:hidden cursor-pointer">
           <p className="text-sm">Ma progression</p>
           <div className="w-full bg-fill-press rounded-full h-6 mt-1">
             <div
@@ -39,7 +45,7 @@ export default function page() {
               style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
             ></div>
           </div>
-        </div>
+        </Link>
         <div className="flex justify-between items-center w-full gap-6 h-full">
           <div className="flex justify-center items-center bg-background-raised w-full h-full rounded-2xl">
             <Canvas style={{ width: '100%', height: '100%' }} gl={{ alpha: true, antialias: true }}>

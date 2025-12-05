@@ -32,27 +32,27 @@ export default function CreditsPage() {
             }}
           />
 
-          <div className="relative z-10 flex flex-col gap-[24px] items-center">
-            <div className="relative w-[555px] h-[429px]">
+          <div className="relative z-10 flex flex-col gap-[24px] items-center px-4">
+            <div className="relative w-full max-w-[555px] h-[200px] sm:h-[300px] md:h-[429px]">
               <Image
                 alt="Logo ./insa.sh"
                 src="/images/logo-insash.png"
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
-            <p className="font-pixelify font-normal text-[48px] text-white leading-normal text-center">
+            <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-white leading-normal text-center">
               Equipe ./insa.sh pour la Nuit de l&apos;info
             </p>
-            <p className="font-pixelify font-normal text-[32px] text-white text-center leading-normal">
+            <p className="font-pixelify font-normal text-[20px] sm:text-[24px] md:text-[32px] text-white text-center leading-normal">
               ./insa.sh ? Ce n&apos;est pas un nom au hasard !
             </p>
-            <div className="flex gap-[24px] items-start justify-center">
+            <div className="flex flex-col sm:flex-row gap-[16px] sm:gap-[24px] items-center justify-center w-full px-4">
               <Button
                 href="https://insash.org"
                 target="_blank"
                 variant="primary"
-                className="text-[24px]"
+                className="text-[16px] sm:text-[20px] md:text-[24px] w-full sm:w-auto"
               >
                 Club Info de l&apos;INSA Hauts-de-France
               </Button>
@@ -60,7 +60,7 @@ export default function CreditsPage() {
                 href="https://hebergos.insash.org"
                 target="_blank"
                 variant="secondary"
-                className="text-[24px]"
+                className="text-[16px] sm:text-[20px] md:text-[24px] w-full sm:w-auto"
               >
                 HebergOS
               </Button>
@@ -69,12 +69,12 @@ export default function CreditsPage() {
         </div>
 
         {/* ./insa.sh Section */}
-        <div className="bg-[#de7f92] flex gap-[64px] items-center justify-center overflow-hidden p-[64px] rounded-[64px] w-full">
+        <div className="bg-[#de7f92] flex flex-col md:flex-row gap-[32px] md:gap-[64px] items-center justify-center overflow-hidden p-[24px] sm:p-[48px] md:p-[64px] rounded-[32px] md:rounded-[64px] w-full">
           <div className="flex flex-1 flex-col gap-[22px] items-center text-[#1f1f1f]">
-            <p className="font-pixelify font-normal text-[48px] w-full leading-normal">
+            <p className="font-pixelify font-normal text-[32px] sm:text-[40px] md:text-[48px] w-full leading-normal">
               ./insa.sh
             </p>
-            <div className="font-anonymous text-[24px] w-full leading-[32px]">
+            <div className="font-anonymous text-[16px] sm:text-[20px] md:text-[24px] w-full leading-[28px] sm:leading-[32px]">
               <p className="mb-0">
                 C&apos;est LE Club Informatique de l&apos;INSA Hauts-de-France.
                 Nous regroupons tous les étudiants passionnés d&apos;informatique,
@@ -93,7 +93,7 @@ export default function CreditsPage() {
               <p>@clubinfoinsahdf sur insta !</p>
             </div>
           </div>
-          <div className="relative w-[438px] h-[298px] rounded-[32px] overflow-hidden">
+          <div className="relative w-full md:w-[438px] h-[200px] sm:h-[250px] md:h-[298px] rounded-[24px] md:rounded-[32px] overflow-hidden">
             <Image
               alt="Club Info INSA"
               src="/images/club-info.png"
@@ -104,7 +104,7 @@ export default function CreditsPage() {
         </div>
 
         {/* Team Section */}
-        <div className="flex flex-col gap-[64px] items-center justify-center overflow-hidden p-[64px] rounded-[64px] w-full">
+        <div className="flex flex-col gap-[32px] md:gap-[64px] items-center justify-center overflow-hidden p-[24px] sm:p-[48px] md:p-[64px] rounded-[32px] md:rounded-[64px] w-full">
           {/* <div className="relative w-[896px] h-[370px]">
             <Image
               alt="Logo NDIR"
@@ -114,16 +114,16 @@ export default function CreditsPage() {
             />
           </div> */}
           <div className="flex flex-col gap-[20px] items-center w-full">
-            <p className="font-pixelify font-normal text-[48px] text-center text-white w-full leading-normal">
+            <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white w-full leading-normal">
               La fine équipe, la voici, la voilà !
             </p>
-            <p className="font-anonymous text-[24px] text-center text-white w-full leading-[32px]">
+            <p className="font-anonymous text-[16px] sm:text-[20px] md:text-[24px] text-center text-white w-full leading-[24px] sm:leading-[28px] md:leading-[32px]">
               Notre équipe est composée de 6 individus très mystérieux
             </p>
             <div className="flex flex-wrap gap-[20px] items-start justify-center w-full">
               {/* Baptiste SALTEL */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Baptiste SALTEL"
                     src="/images/baptiste.jpg"
@@ -131,10 +131,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Baptiste SALTEL
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;Le seul, l&apos;unique, l&apos;exceptionnel, l&quot;ancêtre&quot;
                 </p>
                 <a
@@ -153,8 +153,8 @@ export default function CreditsPage() {
               </div>
 
               {/* Maxime LEMAITRE */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Maxime LEMAITRE"
                     src="/images/maxime.jpg"
@@ -162,10 +162,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Maxime LEMAITRE
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;8 en compta mais trésorier de l&apos;asso&quot;
                 </p>
                 <a
@@ -184,8 +184,8 @@ export default function CreditsPage() {
               </div>
 
               {/* Clément OGE */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Clément OGE"
                     src="/images/clement.jpg"
@@ -193,10 +193,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Clément OGE
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;sympa cette API maintenant essayons de la DDoS&quot;
                 </p>
                 <a
@@ -215,8 +215,8 @@ export default function CreditsPage() {
               </div>
 
               {/* Maël ADVISSE */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Maël ADVISSE"
                     src="/images/mael.jpg"
@@ -224,10 +224,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Maël ADVISSE
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;3D-printer-and-developper-and-volleyball-man&quot;
                 </p>
                 <a
@@ -246,8 +246,8 @@ export default function CreditsPage() {
               </div>
 
               {/* Ambre PETIT */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Ambre PETIT"
                     src="/images/ambre.jpg"
@@ -255,10 +255,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Ambre PETIT
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;la hackeuse aux goûts douteux parce que 7FFF00
                   c&apos;est vraiment moche&quot;
                 </p>
@@ -278,8 +278,8 @@ export default function CreditsPage() {
               </div>
 
               {/* Louison BEDNAROWICZ */}
-              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-[400px]">
-                <div className="relative w-[300px] h-[300px] rounded-[32px] overflow-hidden">
+              <div className="flex flex-col gap-[10px] items-center overflow-hidden p-[10px] w-full sm:w-[350px] md:w-[400px]">
+                <div className="relative w-full max-w-[300px] h-[250px] sm:h-[280px] md:h-[300px] rounded-[24px] md:rounded-[32px] overflow-hidden">
                   <Image
                     alt="Louison BEDNAROWICZ"
                     src="/images/louison.jpg"
@@ -287,10 +287,10 @@ export default function CreditsPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-pixelify font-normal text-[48px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] text-center text-white leading-normal">
                   Louison BEDNAROWICZ
                 </p>
-                <p className="font-pixelify font-normal text-[24px] text-center text-white leading-normal">
+                <p className="font-pixelify font-normal text-[16px] sm:text-[20px] md:text-[24px] text-center text-white leading-normal">
                   aka &quot;connaissez vous INSASH/Codinsa/[INSEREZ NOUVELLE
                   ASSO] ?&quot;
                 </p>
@@ -314,7 +314,7 @@ export default function CreditsPage() {
 
         {/* 3D Model Credits Section */}
         <div
-          className="relative flex gap-[64px] items-center justify-center overflow-hidden p-[64px] rounded-[64px] w-full"
+          className="relative flex flex-col md:flex-row gap-[32px] md:gap-[64px] items-center justify-center overflow-hidden p-[24px] sm:p-[48px] md:p-[64px] rounded-[32px] md:rounded-[64px] w-full"
         >
           {/* Gradient backgrounds */}
           <div
@@ -330,7 +330,7 @@ export default function CreditsPage() {
             }}
           />
 
-          <div className="relative z-10 w-[209px] h-[220px]">
+          <div className="relative z-10 w-[150px] sm:w-[180px] md:w-[209px] h-[160px] sm:h-[190px] md:h-[220px]">
             <Image
               alt="Modèle 3D ordinateur"
               src="/images/cursor.png"
@@ -339,10 +339,10 @@ export default function CreditsPage() {
             />
           </div>
           <div className="relative z-10 flex flex-1 flex-col gap-[22px] items-center text-white">
-            <p className="font-pixelify font-normal text-[48px] w-full leading-normal">
+            <p className="font-pixelify font-normal text-[28px] sm:text-[36px] md:text-[48px] w-full leading-normal">
               Le modèle 3D de l&apos;ordinateur
             </p>
-            <div className="font-anonymous text-[24px] w-full leading-[32px]">
+            <div className="font-anonymous text-[16px] sm:text-[20px] md:text-[24px] w-full leading-[24px] sm:leading-[28px] md:leading-[32px]">
               <p className="mb-0">
                 Nous remercions Sketchfab.com et @anarki3000 pour son modèle 3D
                 libre de droits -
