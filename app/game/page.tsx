@@ -46,7 +46,9 @@ function GameContent() {
               <div className="w-full bg-fill-press rounded-full h-6 mt-1">
                 <div
                   className="bg-[#32A26ECC] h-6 rounded-full transition-all duration-300"
-                  style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
+                  style={{
+                    width: `${Math.min(100, Math.max(0, ((ameliorations.length - availableAmeliorations.length) / ameliorations.length) * 100))}%`,
+                  }}
                 ></div>
               </div>
             </div>
@@ -60,7 +62,9 @@ function GameContent() {
           <div className="w-full bg-fill-press rounded-full h-6 mt-1">
             <div
               className="bg-[#32A26ECC] h-6 rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(100, Math.max(0, 65))}%` }}
+              style={{
+                width: `${Math.min(100, Math.max(0, ((ameliorations.length - availableAmeliorations.length) / ameliorations.length) * 100))}%`,
+              }}
             ></div>
           </div>
         </div>
