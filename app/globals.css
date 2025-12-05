@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
   --foreground: #171717;
 }
 
@@ -10,12 +9,34 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-pixelify: var(--font-pixelify-sans);
+  --font-anonymous: var(--font-anonymous-pro);
 
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
   --color-accent: var(--color-accent);
   --color-background: var(--color-background);
   --color-text: var(--color-text);
+
+  --color-icon-brand: #a65fec;
+  --color-stroke-brand-weak: #a65fec14;
+  --color-background-overlay: #292b33;
+  --color-stroke-weak: #ffffff22;
+  --color-background-base: #12131a;
+  --color-background-raised: #1d1e26;
+  --color-icon-success: #77c7af50;
+  --color-stroke-success-strong: #77c7af50;
+  --color-fill-success-weak: #77c7af08;
+  --color-stroke-strong: #ffffff3c;
+  --color-icon-neutral: #ffffff3c;
+  --color-fill-weak: #ffffff06;
+  --color-stroke-selected: #a65fec;
+  --color-brand-1000: #a65fec;
+  --color-brand-weak: #a65fec05;
+  --color-fill-yellow: #fec62e;
+  --color-stroke-error-strong: #ff9c9c50;
+  --color-icon-error: #ff9c9c50 --color-fill-error-weak: #ff9c9c08;
+  --color-fill-press: #ffffff22;
 }
 
 @layer base {
@@ -53,7 +74,37 @@
 } */
 
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h3 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h4 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: white;
 }
