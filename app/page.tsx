@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function pageAccueil() {
   return (
@@ -51,23 +52,24 @@ export default function pageAccueil() {
           </div>
           
           <div className='flex gap-6 items-start justify-center relative z-10'>
-            <button className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)' }}>
+
+            <Link href="/game" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
               <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-                Deviens acteur de ton infrastructure !
+              Deviens acteur de ton infrastructure !
               </p>
-            </button>
+            </Link>
             
-            <button className='border-2 border-solid flex gap-2.5 items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-brand-weak)', borderColor: 'var(--color-stroke-selected)' }}>
+            <Link href="/leaderboard" className='border-2 border-solid flex gap-2.5 items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-brand-weak)', borderColor: 'var(--color-stroke-selected)', textDecoration: 'none' }}>
               <Image 
-                src="/images/trophy.svg" 
-                alt="Trophy" 
-                width={24} 
-                height={24}
+              src="/images/trophy.svg" 
+              alt="Trophy" 
+              width={24} 
+              height={24}
               />
               <p className='text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)', color: 'var(--color-brand-1000)' }}>
-                Leaderboard
+              Leaderboard
               </p>
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -107,11 +109,11 @@ export default function pageAccueil() {
               </p>
             </div>
             
-            <button className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)' }}>
+            <Link href="https://nird.forge.apps.education.fr/" target="_blank" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
               <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-                Voir le site de la NDIR →
+              Voir le site de la NDIR →
               </p>
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -153,11 +155,11 @@ export default function pageAccueil() {
               <p>Vous recevrez des conseils et un recap des actions que vous pouvez mettre en place pour améliorer vos parcs informatiques.</p>
             </div>
             
-            <button className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)' }}>
+            <Link href="/game" className='flex items-center justify-center px-8 py-4 rounded-[20px] overflow-hidden' style={{ backgroundColor: 'var(--color-icon-brand)', textDecoration: 'none' }}>
               <p className='text-white text-[24px] font-normal text-center' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
-                Jouer →
+              Jouer →
               </p>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
