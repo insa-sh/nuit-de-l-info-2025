@@ -20,6 +20,16 @@ export default function pageAccueil() {
             </p>
           </div>
           
+          {/* Bouton de test du popup */}
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className='px-6 py-3 rounded-[20px]'
+            style={{ backgroundColor: 'var(--color-icon-brand)' }}
+          >
+            <p className='text-white text-[16px] font-normal' style={{ fontFamily: 'var(--font-pixelify-sans)' }}>
+              Test Popup
+            </p>
+          </button>
         </div>
 
         {/* Hero Section */}

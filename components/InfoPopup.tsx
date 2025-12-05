@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 interface InfoPopupProps {
@@ -26,7 +26,23 @@ export default function InfoPopup({
   onPrimaryClick,
   onSecondaryClick,
 }: InfoPopupProps) {
-  if (!isOpen) return null
+  const [isVisible, setIsVisible] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true)
+      // Petit délai pour que l'animation démarre après le rendu
+      setTimeout(() => setIsAnimating(true), 10)
+    } else {
+      setIsAnimating(false)
+      // Attendre la fin de l'animation avant de masquer
+      const timer = setTimeout(() => setIsVisible(false), 300)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
+
+  if (!isVisible) return null
 
   const handlePrimaryClick = () => {
     onPrimaryClick?.()
@@ -46,13 +62,20 @@ export default function InfoPopup({
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center p-4'
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
+      className='fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300'
+      style={{ 
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        opacity: isAnimating ? 1 : 0
+      }}
       onClick={handleOverlayClick}
     >
       <div
-        className='relative flex flex-col gap-6 max-w-[900px] w-full p-8 rounded-[32px]'
-        style={{ backgroundColor: 'var(--color-background-overlay)' }}
+        className='relative flex flex-col gap-6 max-w-[900px] w-full p-8 rounded-[32px] transition-all duration-300'
+        style={{ 
+          backgroundColor: 'var(--color-background-overlay)',
+          transform: isAnimating ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(20px)',
+          opacity: isAnimating ? 1 : 0
+        }}
       >
         {/* Image */}
         <div className='relative w-full h-[300px] md:h-[400px] rounded-[24px] overflow-hidden'>
