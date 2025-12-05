@@ -153,9 +153,11 @@ function GameContent() {
           )}
         </div>
         <div className="px-5 w-full">
-          <Button className="w-full text-center" href="/bilan">
-            <h3>Voir mon bilan</h3>
-          </Button>
+          <Link href={"/bilan"}>
+            <h3 className="align-center hover:bg-icon-brand/80 text-white cursor-pointer font-pixelify transition-all duration-200">
+              Voir mon bilan
+            </h3>
+          </Link>
         </div>
       </div>
 
