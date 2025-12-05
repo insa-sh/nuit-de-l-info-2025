@@ -29,8 +29,7 @@ export default function BilanPage() {
   const handleActionClick = (amelioration: (typeof ameliorations)[0]) => {
     setSelectedItem({
       title: amelioration.title,
-      description:
-        amelioration.choix[0]?.description || "Amélioration",
+      description: amelioration.choix[0]?.description || "Amélioration",
       imageSrc: amelioration.icone,
     });
     setIsPopupOpen(true);
@@ -49,7 +48,7 @@ export default function BilanPage() {
           </h1>
           <div className="grid grid-cols-2 gap-[16px] w-full max-w-[838px]">
             {ameliorations.map((amelioration) => (
-              <div 
+              <div
                 key={amelioration.id}
                 onClick={() => handleActionClick(amelioration)}
                 className="cursor-pointer"

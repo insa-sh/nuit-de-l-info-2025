@@ -38,6 +38,17 @@ function GameContent() {
       const purchased = data.purchases.map((u: any) => u.id);
       const available = ameliorations.filter((a) => !purchased.includes(a.id));
       setAvailableAmeliorations(available);
+
+      // Si toutes les améliorations sont achetées, afficher le popup de félicitations
+      if (available.length === 0) {
+        setPurchasedItem({
+          title: "Félicitations !",
+          description:
+            "Vous avez complété toutes les améliorations ! Vous souhaitez enregistrez votre nom ? Cliquer sur le lien suivant :)",
+          imageSrc: "/images/icons/valid.svg",
+        });
+        setIsPopupOpen(true);
+      }
     }
   };
 
@@ -155,8 +166,19 @@ function GameContent() {
           title={purchasedItem.title}
           description={purchasedItem.description}
           imageSrc={purchasedItem.imageSrc}
-          primaryButtonText="C'est super !"
-          secondaryButtonText="En savoir plus"
+          primaryButtonText={
+            availableAmeliorations.length === 0
+              ? "Aller au jeu"
+              : "C'est super !"
+          }
+          secondaryButtonText={
+            availableAmeliorations.length === 0 ? undefined : "En savoir plus"
+          }
+          onPrimaryClick={
+            availableAmeliorations.length === 0
+              ? () => (window.location.href = "/game-demo")
+              : undefined
+          }
         />
       )}
     </div>
