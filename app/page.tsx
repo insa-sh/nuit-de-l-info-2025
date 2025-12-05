@@ -1,106 +1,238 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+"use client";
 
-export default function Home() {
-  const t = useTranslations("HomePage");
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import InfoPopup from "@/components/InfoPopup";
+import Button from "@/components/Button";
+import Header from "@/components/Header";
+
+export default function pageAccueil() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            {t("welcome")}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col gap-6 items-center justify-center p-7">
+      <div className="flex flex-col gap-6 items-center w-full">
+        {/* Header */}
+        <div className="flex items-center justify-between w-full">
+          <Header />
+
+          {/* Bouton de test du popup */}
+          <Button onClick={() => setIsPopupOpen(true)}>
+            <p className="text-white text-[16px] font-normal">Test Popup</p>
+          </Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <Link
-            href="/3d-tuto"
-            className="flex h-12 w-36 bg-blue-900 white rounded-4xl justify-center items-center p-2"
-          >
-            3D démo
-          </Link>
-          <Link
-            href="/gsap-tuto"
-            className="flex h-12 w-36 bg-green-900 white rounded-4xl justify-center items-center p-2"
-          >
-            GSAP démo
-          </Link>
-          <Link
-            href="/i18n-tuto"
-            className="flex h-12 w-36 bg-red-900 white rounded-4xl justify-center items-center p-2"
-          >
-            i18n démo
-          </Link>
-          <Link
-            href="/theme-tuto"
-            className="flex h-12 w-36 bg-purple-900 white rounded-4xl justify-center items-center p-2"
-          >
-            Theme démo
-          </Link>
-          <Link
-            href="/better-auth-tuto/sign-up"
-            className="flex h-12 w-40 bg-pink-900 white rounded-4xl justify-center items-center p-2"
-          >
-            Better Auth démo
-          </Link>
-          <a
-            href="/game-tuto"
-            className="flex h-12 w-36 bg-orange-500 white rounded-4xl justify-center items-center p-2"
-          >
-            Game démo
-          </a>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+
+        {/* Hero Section */}
+        <div className="flex flex-col gap-6 items-center justify-center px-0 py-16 w-full rounded-[64px] overflow-hidden relative">
+          {/* Background gradients */}
+          <div
+            className="absolute inset-0 opacity-10 pointer-events-none"
+            style={{
+              background: `
+                radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.90) 0%, rgba(0, 0, 0, 0.90) 100%), radial-gradient(79.37% 101.42% at 9.58% 29.04%, rgba(79, 0, 237, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), radial-gradient(44.37% 144.05% at 86.95% 93.13%, rgba(166, 95, 236, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), #1D1E26
+              `,
+            }}
+          />
+
+          <div className="relative z-10">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/images/computer.png"
+              alt="Computer"
+              width={555}
+              height={429}
+              className="object-cover"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/8 px-5 transition-colors hover:border-transparent hover:bg-black/4 dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+
+          <p className="text-white text-[32px] md:text-[48px] font-normal relative z-10 font-pixelify">
+            NIRD Advisor
+          </p>
+
+          <div className="flex flex-col items-center relative z-10">
+            <p className="text-white text-[24px] md:text-[32px] font-normal text-center font-pixelify">
+              <span>Apprennez à </span>
+              <span
+                className="font-bold underline decoration-solid [text-underline-position:from-font]"
+                style={{ color: "#53ac83" }}
+              >
+                responsabiliser
+              </span>
+              <span> votre parc informatique avec la NIRD !</span>
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 items-center md:items-start justify-center relative z-10">
+            <Button href="/game" className="flex items-center justify-center">
+              <p className="text-white text-[24px] font-normal text-center">
+                Deviens acteur de ton infrastructure !
+              </p>
+            </Button>
+
+            <Button
+              href="/leaderboard"
+              variant="secondary"
+              className="flex gap-2.5 items-center justify-center w-full md:w-auto"
+            >
+              <Image
+                src="/images/trophy.svg"
+                alt="Trophy"
+                width={24}
+                height={24}
+              />
+              <p className="text-[18px] md:text-[24px] font-normal text-center">
+                Leaderboard
+              </p>
+            </Button>
+          </div>
         </div>
-      </main>
+
+        {/* NIRD Section */}
+        <div
+          className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full"
+          style={{
+            background: `
+                radial-gradient(94.61% 96.7% at 20.16% 47.05%, rgba(79, 0, 237, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)`,
+          }}
+        >
+          <div className="relative flex-shrink-0">
+            <Image
+              src="/images/nird-logo.png"
+              alt="NIRD Logo"
+              width={373}
+              height={154}
+              className="object-cover"
+            />
+          </div>
+
+          <div className="flex flex-col gap-[79px] items-center flex-1">
+            <p className="text-white text-[32px] md:text-[48px] font-normal w-full font-pixelify">
+              NIRD - Inclusif, Responsable & Durable
+            </p>
+
+            <div className="text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full font-anonymous-pro">
+              <p className="mb-0">
+                <span>Grâce la </span>
+                <span className="font-bold">démarche NIRD</span>
+                <span>
+                  , transformez vos systèmes et infrastructures informatiques
+                  pour les rendre autonome, responsables et indépendentes. Nous
+                  vous guidons pas-à-pas pour transformer votre parc
+                  informatique en un outil inclusif, durable et
+                  responsable.{" "}
+                </span>
+              </p>
+              <p className="mb-0">&nbsp;</p>
+              <p className="leading-8">
+                <span>
+                  Grâce à NIRD, vous pouvez reconditionner du matériel, adopter
+                  des logiciels libres et alléger les coûts, tout en
+                  renforçant{" "}
+                </span>
+                <span className="font-bold">l'autonomie numérique</span>
+                <span> et </span>
+                <span className="font-bold">l'éthique</span>
+                <span> de vos pratiques. </span>
+              </p>
+            </div>
+
+            <Button
+              href="https://nird.forge.apps.education.fr/"
+              target="_blank"
+              className="flex items-center justify-center w-full md:w-auto"
+            >
+              <p className="text-white text-[18px] md:text-[24px] font-normal text-center">
+                Voir le site de la NIRD →
+              </p>
+            </Button>
+          </div>
+        </div>
+
+        {/* Le Clicker NIRD Section */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full relative">
+          {/* Background gradients */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `
+              radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), radial-gradient(28.08% 20.03% at 10.44% 50.05%, rgba(79, 0, 237, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%)              `,
+            }}
+          />
+
+          <div className="relative z-10 flex-shrink-0">
+            <Image
+              src="/images/cursor.png"
+              alt="Cursor"
+              width={320}
+              height={320}
+              className="w-[200px] h-[200px] lg:w-[320px] lg:h-[320px]"
+            />
+          </div>
+
+          <div className="flex flex-col gap-[79px] items-center flex-1 relative z-10">
+            <p className="text-white text-[32px] md:text-[48px] font-normal w-full font-pixelify">
+              Le Clicker NIRD
+            </p>
+
+            <div className="text-white text-[18px] md:text-[24px] leading-6 md:leading-8 w-full font-anonymous-pro">
+              <p className="mb-0">
+                Connaissez-vous le jeu Cookie Clicker ? Un jeu simple et
+                efficace. A chaque fois que le joueur clique sur le cookie, il
+                gagne de l'argent. Avec cet argent, il peut améliorer ses clics,
+                installer des clickers automatiques, ou des fermes à clic. Le
+                but est d'obtenir toujours plus de clics.
+              </p>
+              <p className="mb-0">&nbsp;</p>
+              <p className="mb-0">
+                <span>
+                  A travers la démarche NIRD, nous souhaitons mettre en
+                  place{" "}
+                </span>
+                <span className="font-bold">
+                  des infrastructures toujours plus éthiques
+                </span>
+                <span>
+                  , toujours plus responsables et souveraines. Le principe du
+                  jeu est le suivant : Plus vous touchez à votre infra, plus
+                  vous gagnerez de l'argent, et plus vous pourrez l'améliorer.
+                </span>
+              </p>
+              <p className="mb-0">&nbsp;</p>
+              <p className="mb-0">
+                L'objectif ? Tendre vers un modèle complètement indépendant,
+                open source et éthique !{" "}
+              </p>
+              <p className="mb-0">&nbsp;</p>
+              <p>
+                Vous recevrez des conseils et un recap des actions que vous
+                pouvez mettre en place pour améliorer vos parcs informatiques.
+              </p>
+            </div>
+
+            <Button
+              href="/game"
+              className="flex items-center justify-center w-full md:w-auto"
+            >
+              <p className="text-white text-[18px] md:text-[24px] font-normal text-center">
+                Jouer →
+              </p>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Popup */}
+      <InfoPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        title="Installation d'un OS Libre & Open Source"
+        description="Windows 10 ? Obsolète. Windows 11 ? C'est lourd et cela dépend de Microsoft. Utilisez un système d'exploitation Open Source - cela signifie que le système n'est la propriété d'aucune entreprise et n'a pas pour objectif de faire gagner de l'argent à qui que ce soit."
+        imageSrc="/images/computer.png"
+        primaryButtonText="C'est super !"
+        secondaryButtonText="En savoir plus"
+        onPrimaryClick={() => console.log("Primary clicked")}
+        onSecondaryClick={() => console.log("Secondary clicked")}
+      />
     </div>
   );
 }
