@@ -5,7 +5,7 @@ const { v1: uuidv1 } = require('uuid');
 const MAX_CURRENCY = 1e300;
 
 const admin_id = uuidv1();
-const users = { [admin_id]: { username: "admin", last_seen: Date.now(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
+const users = { [admin_id]: { username: "admin", last_seen: new Date(), creation_date: get_date_obj(admin_id), currency: 1e100, cps: 0, multiplier: 1, purchases: [], flag: "INSASH{t1m3_b4s3d_Uu1D_4r3_pR3d1Ct4bl3}" } };
 const PORT = 3000;
 
 const app = express();
@@ -19,7 +19,7 @@ async function identify_user(req, res, next) {
     session_id = uuidv1();
 
     users[session_id] = {
-      last_seen: Date.now(),
+      last_seen: new Date(),
       creation_date: get_date_obj(session_id),
       currency: 0,
       cps: 0,
@@ -41,14 +41,14 @@ app.get("/click", identify_user, async (req, res) => {
 });
 
 app.get("/balance", identify_user, async (req, res) => {
-  const now = Date.now();
+  const now = new Date();
   const session = req.session;
 
   const elapsedSeconds = (now - session.last_seen) / 1000;
   session.currency = Math.min(session.currency + session.cps * elapsedSeconds, MAX_CURRENCY);
 
   res.json({ currency: Math.floor(req.session.currency) });
-  req.session.last_seen = Date.now();
+  req.session.last_seen = new Date();
 });
 
 app.get("/user", identify_user, async (req, res) => {
@@ -87,7 +87,7 @@ app.post("/purchase", identify_user, async (req, res) => {
     cost: body.cost,
     cps: body.cps,
     multiplier: body.multiplier,
-    purchased_on: Date.now(),
+    purchased_on: new Date(),
   });
 
   res.json(req.session);
@@ -122,19 +122,16 @@ app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
 
-function get_time_int(uuid_str) {
-  var uuid_arr = uuid_str.split('-'),
+function get_date_obj(uuid_str) {
+  const uuid_arr = uuid_str.split('-'),
     time_str = [
       uuid_arr[2].substring(1),
       uuid_arr[1],
       uuid_arr[0]
-    ].join('');
-  return parseInt(time_str, 16);
-};
-
-function get_date_obj(uuid_str) {
-  var int_time = get_time_int(uuid_str) - 122192928000000000,
+    ].join(''),
+    int_time = parseInt(time_str, 16) - 122192928000000000,
     int_millisec = Math.floor(int_time / 10000);
-  return int_millisec;
-};
+  
+  return new Date(int_millisec);
+}
 
