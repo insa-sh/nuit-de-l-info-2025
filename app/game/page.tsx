@@ -22,7 +22,7 @@ export default function page() {
                 ></div>
               </div>
             </div>
-            <Button>
+            <Button href="/leaderboard">
               <FaTrophy className="text-white text-2xl"></FaTrophy>
             </Button>
           </div>
@@ -65,7 +65,7 @@ export default function page() {
         </div>
         <div className="px-5 w-full">
           <Button className="w-full text-center">
-            <h3>Upgrade</h3>
+            <h3>Mes Améliorations</h3>
           </Button>
         </div>
       </div>

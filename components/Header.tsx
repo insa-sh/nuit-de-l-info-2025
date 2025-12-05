@@ -1,10 +1,14 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex min-w-fit items-center gap-4">
+    <Link
+      className="flex min-w-fit items-center gap-4 font-pixelify cursor-pointer"
+      href="/"
+    >
       <div className="w-10 h-10 bg-white"></div>
-      <h1>NDIR Advisor</h1>
-    </div>
+      <h1>NIRD Advisor</h1>
+    </Link>
   );
 }
