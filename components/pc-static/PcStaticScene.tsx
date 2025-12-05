@@ -33,7 +33,7 @@ const PcStaticScene: React.FC<PcSceneProps> = ({
 
   return (
     <Suspense fallback={<Loader />}>
-      <color attach="background" args={["#1a1a2e"]} />
+      {/* <color attach="background" args={["transparent"]} /> */}
       
       <PcLights />
 
