@@ -22,7 +22,7 @@ export default function pageAccueil() {
           <div className='absolute inset-0 opacity-10 pointer-events-none' 
             style={{
               background: `
-                radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.90) 0%, rgba(0, 0, 0, 0.90) 100%), radial-gradient(79.37% 101.42% at 9.58% 29.04%, rgba(79, 0, 237, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), radial-gradient(44.37% 144.05% at 86.95% 93.13%, rgba(166, 95, 236, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), #1D1E26;
+                radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.90) 0%, rgba(0, 0, 0, 0.90) 100%), radial-gradient(79.37% 101.42% at 9.58% 29.04%, rgba(79, 0, 237, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), radial-gradient(44.37% 144.05% at 86.95% 93.13%, rgba(166, 95, 236, 0.90) 0%, rgba(0, 0, 0, 0.10) 100%), #1D1E26
               `
             }}
           />
@@ -76,7 +76,7 @@ export default function pageAccueil() {
         {/* NDIR Section */}
         <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center overflow-hidden p-8 lg:p-16 rounded-[64px] w-full' style={{
               background: `
-                radial-gradient(94.61% 96.7% at 20.16% 47.05%, rgba(79, 0, 237, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%);`
+                radial-gradient(94.61% 96.7% at 20.16% 47.05%, rgba(79, 0, 237, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)`
             }}>
           <div className='relative flex-shrink-0'>
             <Image 
@@ -123,7 +123,7 @@ export default function pageAccueil() {
           <div className='absolute inset-0 pointer-events-none' 
             style={{
               background: `
-              radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), radial-gradient(28.08% 20.03% at 10.44% 50.05%, rgba(79, 0, 237, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%);              `
+              radial-gradient(30.62% 87.19% at 95.05% 36.08%, rgba(237, 0, 130, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), radial-gradient(28.08% 20.03% at 10.44% 50.05%, rgba(79, 0, 237, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%)              `
             }}
           />
           
